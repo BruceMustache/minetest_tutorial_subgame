@@ -1,7 +1,7 @@
 -- tutorial/creative/init.lua
 
 -- intllib support
-local S
+local S, ES
 if (minetest.get_modpath("intllib")) then
 	S = intllib.Getter()
 	ES = function( s ) return minetest.formspec_escape(S(s)) end
