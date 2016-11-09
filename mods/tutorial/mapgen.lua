@@ -7,7 +7,7 @@ local insecure_environment = minetest.request_insecure_environment()
 
 -- entity management functions
 
-function save_entities()
+local function save_entities()
 	local entities = {}
 	local count = 0;
 
@@ -60,11 +60,11 @@ function save_entities()
 	return count
 end
 
-function get_saved_entities()
+local function get_saved_entities()
 	return tutorial.entities
 end
 
-function load_entities()
+local function load_entities()
 	local entities = get_saved_entities()
 
 	local count = 0
@@ -80,7 +80,7 @@ function load_entities()
 	minetest.log("action", "[tutorial] " .. count .. " entities loaded")
 end
 
-function load_entities_area(minp, maxp)
+local function load_entities_area(minp, maxp)
 
 	if not tutorial.entities_cache then
 		tutorial.entities_cache = get_saved_entities()
@@ -160,7 +160,7 @@ do
 	end
 end
 
-function save_schematic()
+local function save_schematic()
 	local success = true
 	for k,sector in pairs(tutorial.map_sector) do
 		local filename = tutorial.map_directory .. "sector_"..k
@@ -178,7 +178,7 @@ function save_schematic()
 	return success
 end
 
-function load_schematic()
+local function load_schematic()
 	local success = true
 	for k,sector in pairs(tutorial.map_sector) do
 		local filename = tutorial.map_directory .. "sector_"..k
@@ -210,7 +210,7 @@ end
 -- @param filename (without externsion) with the path to save the shcematic and metadata to
 -- @param slice_prob_list = {{ypos=,prob=}, ...} list of probabilities for the slices to be loaded (if nil, always load)
 -- @return The number of nodes with metadata.
-function save_region(minp, maxp, probability_list, filename, slice_prob_list)
+local function save_region(minp, maxp, probability_list, filename, slice_prob_list)
 
 	local success = minetest.create_schematic(minp, maxp, probability_list, filename .. ".mts", slice_prob_list)
 	if not success then
@@ -299,7 +299,7 @@ end
 -- @param replacements = {["old_name"] = "convert_to", ...}
 -- @param force_placement is a boolean indicating whether nodes other than air and ignore are replaced by the schematic
 -- @return boolean indicating success or failure
-function load_region(minp, filename, vmanip, rotation, replacements, force_placement)
+local function load_region(minp, filename, vmanip, rotation, replacements, force_placement)
 
 	if rotation == "random" then
 		rotation = {nil, 90, 180, 270}
