@@ -136,7 +136,7 @@ minetest.register_node("default:ladder", {
 	selection_box = {
 		type = "wallmounted",
 	},
-	groups = {choppy=2,flammable=2},
+	groups = {},
 	legacy_wallmounted = true,
 	sounds = default.node_sound_wood_defaults(),
 })
@@ -144,7 +144,7 @@ minetest.register_node("default:ladder", {
 minetest.register_node("default:wood", {
 	description = S("wooden planks"),
 	tiles = {"default_wood.png"},
-	groups = {choppy=2,flammable=3,wood=1},
+	groups = {choppy=2,wood=1},
 	sounds = default.node_sound_wood_defaults(),
 })
 
@@ -679,7 +679,7 @@ minetest.register_node("default:apple", {
 		type = "fixed",
 		fixed = {-0.2, -0.5, -0.2, 0.2, 0, 0.2}
 	},
-	groups = {fleshy=3,dig_immediate=3,flammable=2,leafdecay=3,leafdecay_drop=1},
+	groups = {dig_immediate=3,},
 	on_use = minetest.item_eat(1),
 	sounds = default.node_sound_leaves_defaults(),
 	after_place_node = function(pos, placer, itemstack)
