@@ -12,6 +12,7 @@ minetest.register_node("supplemental:sticky", {
 		"default_stone_brick.png", "default_stone_brick.png", "default_stone_brick.png",
 		"default_stone_brick.png", "default_stone_brick.png"},
 	groups = {immortal=1, disable_jump=1},
+	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("supplemental:bouncy", {
