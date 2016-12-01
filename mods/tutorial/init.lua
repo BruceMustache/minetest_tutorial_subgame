@@ -343,7 +343,7 @@ number keys.
    Select next item in hotbar: [Mouse wheel down]
    Select item #N in hotbar: the key with the number #N
 
-The item you've seleted is also the item you wield. This will be important later for
+The item you've selected is also the item you wield. This will be important later for
 tools, mining, building, etc.]]
 
 
