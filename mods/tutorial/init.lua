@@ -758,7 +758,7 @@ and the fuel into the 'Fuel' slot.
 As soon as the items have been placed, the furnace automatically starts to smelt the
 items. The furnace becomes active and consumes an item in the fuel slot. The flame
 goes on and will continue burning for a given time. The time depends on the fuel type.
-Some fuels burn very short, and other burn longer. In the furnace menu, the burn time
+Some fuels burn very short, and others burn longer. In the furnace menu, the burn time
 is indicated by the flame symbol. As soon as the flame goes out, the furnace may
 continue burning if there is still fuel and smeltable material in the furnace,
 otherwise, the furnace becomes inactive again.
