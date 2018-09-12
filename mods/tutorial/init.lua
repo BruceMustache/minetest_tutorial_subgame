@@ -285,12 +285,6 @@ ladder.
 
 You may try out sneaking at this little blocky pyramid.]=]
 
-tutorial.texts.sneakjump =
-[=[You can jump slightly higher if you jump while holding the sneak key.
-
-   Sneak: [Shift]
-   Jump: [Space]]=]
-
 tutorial.texts.hotbar =
 [[At the bottom of the screen you see 8 squares. This is called the 'hotbar'.
 The hotbar allows you to quickly access some items from your inventory.
@@ -876,7 +870,6 @@ tutorial.register_infosign("runover", "Small Abysses", tutorial.texts.runover)
 tutorial.register_infosign("jumpup", "Jumping (1)", tutorial.texts.jumpup)
 tutorial.register_infosign("jumpover", "Jumping (2)", tutorial.texts.jumpover)
 tutorial.register_infosign("sneak", "Sneaking", tutorial.texts.sneak)
-tutorial.register_infosign("sneakjump", "Sneak-jumping", tutorial.texts.sneakjump)
 tutorial.register_infosign("orientation", "Information about the following tutorial sections", tutorial.texts.orientation)
 tutorial.register_infosign("hotbar", "Hotbar", tutorial.texts.hotbar)
 tutorial.register_infosign("eat", "Comestibles and Eating", tutorial.texts.eat)
