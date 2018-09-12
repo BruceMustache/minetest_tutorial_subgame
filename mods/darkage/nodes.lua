@@ -39,7 +39,7 @@ minetest.register_node("darkage:lamp", {
 	description = S("lamp"),
 	tiles = {"darkage_lamp.png"},
 	paramtype = "light",
-	light_source = 18,
+	light_source = minetest.LIGHT_MAX,
 	groups = {immortal=1},
 	sounds = default.node_sound_glass_defaults(),
 })
