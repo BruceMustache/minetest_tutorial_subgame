@@ -160,47 +160,6 @@ do
 	end
 end
 
-local function save_schematic()
-	local success = true
-	for k,sector in pairs(tutorial.map_sector) do
-		local filename = tutorial.map_directory .. "sector_"..k
-		local minp = sector
-		local maxp = {
-			x = sector.x + sector.l,
-			y = sector.y + sector.l,
-			z = sector.z + sector.l
-		}
-		if not save_region(minp, maxp, nil, filename) then
-			minetest.log("error", "[tutorial] error loading Tutorial World sector " .. minetest.pos_to_string(sector))
-			success = false
-		end
-	end
-	return success
-end
-
-local function load_schematic()
-	local success = true
-	for k,sector in pairs(tutorial.map_sector) do
-		local filename = tutorial.map_directory .. "sector_"..k
-		minetest.log("action", "loading sector " .. minetest.pos_to_string(sector))
-		sector.maxp = vector.add(sector, {x=sector.l, y=sector.l, z=sector.l})
-
-		-- Load the area above the schematic to guarantee we have blue sky above
-		-- and prevent lighting glitches
-		--minetest.emerge_area(vector.add(sector, {x=0, y=sector.l, z=0}), vector.add(sector.maxp, {x=0,y=32,z=0}))
-
-		local vmanip = VoxelManip(sector, sector.maxp)
-		if not load_region(sector, filename, vmanip, nil, nil, true) then
-			minetest.log("error", "[tutorial] error loading Tutorial World sector " .. minetest.pos_to_string(sector))
-			success = false
-		end
-		vmanip:calc_lighting()
-		vmanip:write_to_map()
-		vmanip:update_map()
-	end
-	return success
-end
-
 
 -- Saves schematic in the Minetest Schematic (and metadata) to disk.
 -- Takes the same arguments as minetest.create_schematic
@@ -354,6 +313,47 @@ local function load_region(minp, filename, vmanip, rotation, replacements, force
 	end
 	minetest.log("action", "[tutorial] schematic + metadata loaded  on ".. minetest.pos_to_string(minp))
 	return true
+end
+
+local function save_schematic()
+	local success = true
+	for k,sector in pairs(tutorial.map_sector) do
+		local filename = tutorial.map_directory .. "sector_"..k
+		local minp = sector
+		local maxp = {
+			x = sector.x + sector.l,
+			y = sector.y + sector.l,
+			z = sector.z + sector.l
+		}
+		if not save_region(minp, maxp, nil, filename) then
+			minetest.log("error", "[tutorial] error loading Tutorial World sector " .. minetest.pos_to_string(sector))
+			success = false
+		end
+	end
+	return success
+end
+
+local function load_schematic()
+	local success = true
+	for k,sector in pairs(tutorial.map_sector) do
+		local filename = tutorial.map_directory .. "sector_"..k
+		minetest.log("action", "loading sector " .. minetest.pos_to_string(sector))
+		sector.maxp = vector.add(sector, {x=sector.l, y=sector.l, z=sector.l})
+
+		-- Load the area above the schematic to guarantee we have blue sky above
+		-- and prevent lighting glitches
+		--minetest.emerge_area(vector.add(sector, {x=0, y=sector.l, z=0}), vector.add(sector.maxp, {x=0,y=32,z=0}))
+
+		local vmanip = VoxelManip(sector, sector.maxp)
+		if not load_region(sector, filename, vmanip, nil, nil, true) then
+			minetest.log("error", "[tutorial] error loading Tutorial World sector " .. minetest.pos_to_string(sector))
+			success = false
+		end
+		vmanip:calc_lighting()
+		vmanip:write_to_map()
+		vmanip:update_map()
+	end
+	return success
 end
 
 
