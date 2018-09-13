@@ -82,28 +82,25 @@ end
 
 local function load_entities_area(minp, maxp)
 
-	if not tutorial.entities_cache then
-		tutorial.entities_cache = get_saved_entities()
-	end
+	local nodes = minetest.find_nodes_in_area(minp, maxp, "tutorial:itemspawner")
 
 	local count = 0
-	for k,entity in pairs(tutorial.entities_cache) do
-
-		-- Only load it if not out of the generating range
-		if not ((maxp.x < entity.pos.x) or (minp.x > entity.pos.x)
-			or (maxp.y < entity.pos.y) or (minp.y > entity.pos.y)
-			or (maxp.z < entity.pos.z) or (minp.z > entity.pos.z))
-		then
-			if entity.name == "__builtin:item" then
-				minetest.add_item(entity.pos, entity.itemstring)
-			else
-				local luaentity = minetest.add_entity(entity.pos, entity.name)
-				luaentity.on_activate(luaentity, entity.staticdata)
-			end
-			count = count + 1
-		end
+	for n=1, #nodes do
+		local timer = minetest.get_node_timer(nodes[n])
+		timer:start(1)
+		count = count + 1
 	end
-	minetest.log("action", "[tutorial] " .. count .. " entities loaded")
+	minetest.log("action", "[tutorial] " .. count .. " item spawners loaded")
+end
+
+local function init_item_spawners(spawners)
+	local count = 0
+	for n=1, #spawners do
+		local timer = minetest.get_node_timer(spawners[n])
+		timer:start(1)
+		count = count + 1
+	end
+	minetest.log("action", "[tutorial] " .. count .. " item spawners initialized")
 end
 
 ---
@@ -156,6 +153,10 @@ do
 		minetest.log("action", "[tutorial] Could not open file '" .. filename .. "': " .. err)
 	else
 		tutorial.entities = minetest.deserialize(minetest.decompress(f:read("*a")))
+		for e=1, #tutorial.entities do
+			local entity = tutorial.entities[e]
+			minetest.log("action", entity.itemstring .. " " .. minetest.pos_to_string(entity.pos))
+		end
 		f:close()
 	end
 end
@@ -280,14 +281,20 @@ local function load_region(minp, filename, vmanip, rotation, replacements, force
 	end
 
 	local data = tutorial.sector_data[filename]
-	if not data then return true end
+	if not data then return true, {} end
 
 	local get_meta = minetest.get_meta
 
+	local spawners = {}
 	if not rotation or rotation == 0 then
 		for i, entry in ipairs(data.nodes) do
 			entry.x, entry.y, entry.z = minp.x + entry.x, minp.y + entry.y, minp.z + entry.z
-			if entry.meta then get_meta(entry):from_table(entry.meta) end
+			if entry.meta then
+				get_meta(entry):from_table(entry.meta)
+				if entry.meta.fields.spawned then
+					table.insert(spawners, {x=entry.x, y=entry.y, z=entry.z})
+				end
+			end
 		end
 	else
 		local maxp_x, maxp_z = minp.x + data.size.x, minp.z + data.size.z
@@ -311,8 +318,8 @@ local function load_region(minp, filename, vmanip, rotation, replacements, force
 			return false
 		end
 	end
-	minetest.log("action", "[tutorial] schematic + metadata loaded  on ".. minetest.pos_to_string(minp))
-	return true
+	minetest.log("action", "[tutorial] schematic + metadata loaded on ".. minetest.pos_to_string(minp))
+	return true, spawners
 end
 
 local function save_schematic()
@@ -432,10 +439,10 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			then
 
 				local filename = tutorial.map_directory .. "sector_" .. k
-				local loaded = load_region(sector, filename, vm)
+				local loaded, spawners = load_region(sector, filename, vm)
 				if loaded then
-					-- Load entities in the area as well, and mark it as loaded
-					load_entities_area(sector, sector.maxp)
+					-- Initialize item spawners in the area as well, and mark it as loaded
+					init_item_spawners(spawners)
 					tutorial.state.loaded[k] = true
 				end
 				state_changed = true

@@ -1081,6 +1081,85 @@ minetest.register_node("tutorial:ruler", {
 	groups = {immortal=1, attached_node=1},
 })
 
+-- Item spawner
+minetest.register_node("tutorial:itemspawner", {
+	description = S("item spawner"),
+	drawtype = "airlike",
+	paramtype = "light",
+	walkable = false,
+	-- Set to true if you want to edit
+	pointable = false,
+	floodable = false,
+	air_equivalent = true,
+	diggable = false,
+	inventory_image = "unknown_node.png",
+	wield_image = "unknown_node.png",
+	buildable_to = false,
+	sunlight_propagates = true,
+	groups = {immortal=1},
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		meta:set_int("spawned", 0)
+		meta:set_int("configged", 0)
+		local formspec = ""..
+		"size[12,6]"..
+		"label[-0.15,-0.4;"..minetest.formspec_escape(S("Item spawner")).."]"..
+		"field[0,1;10,1;offset;"..minetest.formspec_escape(S("Offset"))..";(0,0,0)]"..
+		"field[0,2;10,1;itemstring;"..minetest.formspec_escape(S("Itemstring"))..";]"..
+		"button_exit[4.5,5.5;3,1;close;"..minetest.formspec_escape(S("OK")).."]"
+		meta:set_string("formspec", formspec)
+		meta:set_string("infotext", S("Item spawner (inactive)"))
+	end,
+	on_receive_fields = function(pos, formname, fields, sender)
+		if not fields.offset or fields.offset == "" then
+			fields.offset = "(0,0,0)"
+		end
+		if fields.offset and fields.itemstring then
+			local meta = minetest.get_meta(pos)
+			meta:set_string("offset", fields.offset)
+			meta:set_int("configged", 1)
+			meta:set_string("itemstring", fields.itemstring)
+			meta:set_string("formspec", "")
+			meta:set_string("infotext", "")
+		end
+	end,
+	on_timer = function(pos, elapsed)
+		local meta = minetest.get_meta(pos)
+		if meta:get_int("configged") == 0 then
+			return
+		end
+
+		local offset = minetest.string_to_pos(meta:get_string("offset"))
+		local itemstring = meta:get_string("itemstring")
+		local x, y, z = offset.x, offset.y, offset.z
+		local spawnpos = {x=pos.x+x, y=pos.y+y, z=pos.z+z}
+		local objs = minetest.get_objects_inside_radius(spawnpos, 1)
+		local spawned = meta:get_int("spawned")
+		if spawned ~= 1 then
+			for o=1, #objs do
+				local ent = objs[o]:get_luaentity()
+				if ent then
+					if ent.name == "__builtin:item" and ent.itemstring == itemstring then
+						meta:set_int("spawned", 1)
+					end
+				end
+			end
+		end
+		spawned = meta:get_int("spawned")
+		if spawned ~= 1 then
+			if itemstring ~= nil and itemstring ~= "" then
+				minetest.add_item(spawnpos, itemstring)
+				local timer = minetest.get_node_timer(pos)
+				timer:start(5)
+				return
+			end
+		end
+
+		local timer = minetest.get_node_timer(pos)
+		timer:start(5)
+	end,
+})
+
 -- Crafting guides (example crafting images at crafting section)
 function tutorial.craftguideinfo(pos)
 	local meta = minetest.get_meta(pos)
