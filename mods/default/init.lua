@@ -33,12 +33,17 @@ function default.get_hotbar_bg(x,y)
 	return out
 end
 
+local music = ""
+if minetest.get_modpath("mpd") then
+	music = "button[-0.1,0.7;3,1;togglemusic;"..minetest.formspec_escape(S("Toggle music")).."]"
+end
+
 default.gui_suvival_form = "size[8,10]"..
 			default.gui_bg..
 			default.gui_bg_img..
 			default.gui_slots..
 			"button_exit[-0.1,-0.3;3,1;gotostart;"..minetest.formspec_escape(S("Back to start")).."]"..
-			"button[-0.1,0.7;3,1;togglemusic;"..minetest.formspec_escape(S("Toggle music")).."]"..
+			music ..
 			"label[0,3.75;"..minetest.formspec_escape(S("Player inventory:")).."]"..
 			"list[current_player;main;0,4.25;8,1;]"..
 			"list[current_player;main;0,5.5;8,3;8]"..
