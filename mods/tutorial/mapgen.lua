@@ -296,6 +296,8 @@ end
 
 ------ Map Generation
 
+local vbuffer = nil
+
 tutorial.state = tutorial.state or {}
 tutorial.state.loaded = tutorial.state.loaded or {}
 minetest.register_on_generated(function(minp, maxp, seed)
@@ -330,6 +332,27 @@ minetest.register_on_generated(function(minp, maxp, seed)
 			end
 		end
 	end
+
+	-- Make grass
+	local grasslev = 0
+	if minp.y <= grasslev and maxp.y >= grasslev then
+		local vdata = vm:get_data(vbuffer)
+		local area = VoxelArea:new({MinEdge=emin, MaxEdge=emax})
+		local c_grass = minetest.get_content_id("default:dirt_with_grass")
+		local c_dirt = minetest.get_content_id("default:dirt_with_grass")
+		for x = minp.x, maxp.x do
+			for z = minp.z, maxp.z do
+				local p_pos = area:index(x, grasslev, z)
+				local _, areas_count = areas:getAreasAtPos({x=x,y=grasslev,z=z})
+				if vdata[p_pos] == minetest.CONTENT_AIR and areas_count == 0 then
+					vdata[p_pos] = c_grass
+				end
+			end
+		end
+		vm:set_data(vdata)
+		state_changed = true
+	end
+
 
 	if(state_changed) then
 		vm:calc_lighting(nil, nil, false)
