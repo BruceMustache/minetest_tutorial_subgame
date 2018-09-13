@@ -178,7 +178,7 @@ You may want to read the "Getting Started" section of the Community Wiki,
 which is more specific about the default game.
 Said document can be found at:
 
-<http://wiki.minetest.net/Getting_Started>
+<https://wiki.minetest.net/Getting_Started>
 
 Alternatively, you may check out one of the games which are shared on the Minetest forums.]]
 
@@ -886,15 +886,15 @@ You can review a shorter version of the controls in the pause menu.]]
 tutorial.texts.online =
 [[You may want to check out these online resources related to Minetest:
 
-Official homepage of Minetest: <http://minetest.net/>
+Official homepage of Minetest: <https://minetest.net/>
 The main place to find the most recent version of Minetest.
 
-Community wiki: <http://wiki.minetest.net/>
+Community wiki: <https://wiki.minetest.net/>
 A community-based documentation website for Minetest. Anyone with an account can edit
 it! It also features a documentation of the default game, which was NOT covered by
 this tutorial.
 
-Webforums: <http://forums.minetest.net/>
+Webforums: <https://forum.minetest.net/>
 A web-based discussion platform where you can discuss everything related to Minetest.
 This is also a place where player-made mods and games are published and
 discussed. The discussions are mainly in English, but there is also space for
