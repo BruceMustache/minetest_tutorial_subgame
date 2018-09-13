@@ -49,6 +49,7 @@ Player inventory: = Spielerinventar:
 This furnace is active and constantly burning its fuel. = Der Ofen ist aktiv und verbrennt beständig seinen Brennstoff.
 This furnace is inactive. Please read the sign above. = Der Ofen ist inaktiv. Bitte lesen Sie das obige Schild.
 Back to start = Zurück zum Anfang
+Toggle music = Musik umschalten
 Crafting grid: = Fertigungsgitter:
 Output slot: = Resultat:
 

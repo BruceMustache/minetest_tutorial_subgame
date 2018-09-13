@@ -49,6 +49,7 @@ Player inventory: = Bezittingen:
 This furnace is active and constantly burning its fuel. = De oven is actief en verbrandt voortdurend brandstof.
 This furnace is inactive. Read the instructions to learn how to activate it. = Deze oven is niet actief. Lees de aanwijzingen en leer hoe de oven aangezet wordt.
 Back to start = Terug
+#Toggle music =
 Crafting grid: = Crafting raster:
 Output slot: = Resultaat:
 

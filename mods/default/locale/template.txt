@@ -50,6 +50,7 @@ Player inventory:
 This furnace is active and constantly burning its fuel.
 This furnace is inactive. Please read the sign above.
 Back to start
+Toggle music
 Crafting grid:
 Output slot:
 

@@ -38,6 +38,7 @@ default.gui_suvival_form = "size[8,10]"..
 			default.gui_bg_img..
 			default.gui_slots..
 			"button_exit[-0.1,-0.3;3,1;gotostart;"..minetest.formspec_escape(S("Back to start")).."]"..
+			"button[-0.1,0.7;3,1;togglemusic;"..minetest.formspec_escape(S("Toggle music")).."]"..
 			"label[0,3.75;"..minetest.formspec_escape(S("Player inventory:")).."]"..
 			"list[current_player;main;0,4.25;8,1;]"..
 			"list[current_player;main;0,5.5;8,3;8]"..

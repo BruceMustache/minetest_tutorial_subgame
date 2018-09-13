@@ -1,6 +1,8 @@
  
 ### mpd Mod for Minetest
 (c) 2017 orwell96
+Slightly modified for the Tutorial.
+
 This mod is licensed under the MIT License.
 
 Adds an easy but powerful background music backend.

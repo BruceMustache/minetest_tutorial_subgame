@@ -197,3 +197,14 @@ minetest.register_chatcommand("mvolume", {
 		end
 	end,		
 })
+
+minetest.register_on_player_receive_fields(function(player, formname, fields)
+	if(fields.togglemusic) then
+		if mpd.playing then
+			mpd.stop_song()
+		else
+			mpd.next_song()
+		end
+	end
+end)
+

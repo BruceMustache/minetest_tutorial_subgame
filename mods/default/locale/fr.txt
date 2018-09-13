@@ -50,6 +50,7 @@ Player inventory: = Inventaire du joueur :
 This furnace is active and constantly burning its fuel. = Ce four est actif et brûle constamment son carburant.
 This furnace is inactive. Read the instructions to learn how to activate it. = Ce four est inactif. Lisez les instructions pour savoir comment l'activer.
 Back to start = Revenir au début
+#Toggle music =
 Crafting grid: = Grille de fabrication :
 Output slot: = Production :
 

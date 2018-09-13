@@ -50,6 +50,7 @@ Player inventory: = Αντικείμενα παίχτη
 This furnace is active and constantly burning its fuel. = Αυτός ο φούρνος είναι ανοιχτός και καει συνεχώς το καύσιμο.
 This furnace is inactive. Read the instructions to learn how to activate it. = Αυτός ο φούρνος είναι σβηστός. Διάβασε τις οδηγίες για να μάθεις πως να τον ανοίξεις.
 Back to start = Πίσω στην αρχή
+#Toggle music =
 Crafting grid: = Τετραγωνα κατασκευών
 Output slot: = τετράγωνο εξόδου
 

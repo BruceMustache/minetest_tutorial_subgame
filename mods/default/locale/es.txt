@@ -49,6 +49,7 @@ Player inventory: = inventario del jugador:
 This furnace is active and constantly burning its fuel. = Este horno está encendido y quemando su combustible constantemente.
 This furnace is inactive. Read the instructions to learn how to activate it. = Este horno está apagado. Lee las instrucciones para aprender a encenderlo.
 Back to start = Volver al principio
+#Toggle music =
 Crafting grid: = cuadrícula de manufactura:
 Output slot: = hueco de productos:
 
