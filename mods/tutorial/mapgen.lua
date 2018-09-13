@@ -7,92 +7,6 @@ local insecure_environment = minetest.request_insecure_environment()
 
 -- entity management functions
 
-local function save_entities()
-	local entities = {}
-	local count = 0;
-
-	for id,entity in pairs(minetest.luaentities) do
-		local entry = {
-			pos = entity.object:getpos(),
-			name = entity.name,
-			staticdata = entity.object:get_luaentity().get_staticdata(entity.object)
-		}
-		if entry.name == "__builtin:item" then
-			entry.itemstring = entity.itemstring
-		end
-		table.insert(entities, entry)
-		count = count+1
-		minetest.log("action", "[tutorial] entity FOUND to be saved: "..(entry.itemstring or entry.name).." at " ..entry.pos.x..","..entry.pos.y..","..entry.pos.z)
-	end
-
-	-- Because the entities can easily be unloaded, we won't override the
-	-- entities save file. Instead, we will try to deduce as best as we can to try
-	-- to include as well the already saved entities without creating duplicates.
-	local saved_entities = get_saved_entities()
-
-	for k,ent in pairs(saved_entities) do
-		local already_added=false
-
-		for k,e in pairs(entities) do
-			if math.abs(ent.pos.x-e.pos.x) + math.abs(ent.pos.y - e.pos.y) + math.abs(ent.pos.z -e.pos.z) < 1 then
-				already_added=true
-				break
-			end
-		end
-		if not already_added then
-			table.insert(entities,ent)
-			count = count + 1
-			minetest.log("action", "[tutorial] entity to CONTINUE saved: "..(ent.itemstring or ent.name).." at " ..ent.pos.x..","..ent.pos.y..","..ent.pos.z)
-		end
-	end
-
-	local str = minetest.serialize(entities)
-
-	local filename = tutorial.map_directory .. "entities"
-	local file, err = insecure_environment.io.open(filename, "wb")
-	if err ~= nil then
-		error("Couldn't write to \"" .. filename .. "\"")
-	end
-	file:write(minetest.compress(str))
-	file:flush()
-	file:close()
-	minetest.log("action","[tutorial] " .. filename .. ": " .. count .. " entities saved")
-	return count
-end
-
-local function get_saved_entities()
-	return tutorial.entities
-end
-
-local function load_entities()
-	local entities = get_saved_entities()
-
-	local count = 0
-	for k,entity in pairs(entities) do
-		if entity.name == "__builtin:item" then
-			minetest.add_item(entity.pos, entity.itemstring)
-		else
-			local luaentity = minetest.add_entity(entity.pos, entity.name)
-			luaentity.on_activate(luaentity, entity.staticdata)
-		end
-		count = count + 1
-	end
-	minetest.log("action", "[tutorial] " .. count .. " entities loaded")
-end
-
-local function load_entities_area(minp, maxp)
-
-	local nodes = minetest.find_nodes_in_area(minp, maxp, "tutorial:itemspawner")
-
-	local count = 0
-	for n=1, #nodes do
-		local timer = minetest.get_node_timer(nodes[n])
-		timer:start(0)
-		count = count + 1
-	end
-	minetest.log("action", "[tutorial] " .. count .. " item spawners loaded")
-end
-
 local function init_item_spawners(spawners)
 	local count = 0
 	for n=1, #spawners do
@@ -143,24 +57,6 @@ for k,sector in pairs(tutorial.map_sector) do
 		f:close()
 	end
 end
-
--- Load the entity data from disc
-tutorial.entities = {}
-do
-	local filename = tutorial.map_directory .. "entities"
-	local f, err = io.open(filename, "rb")
-	if not f then
-		minetest.log("action", "[tutorial] Could not open file '" .. filename .. "': " .. err)
-	else
-		tutorial.entities = minetest.deserialize(minetest.decompress(f:read("*a")))
-		for e=1, #tutorial.entities do
-			local entity = tutorial.entities[e]
-			minetest.log("action", entity.itemstring .. " " .. minetest.pos_to_string(entity.pos))
-		end
-		f:close()
-	end
-end
-
 
 -- Saves schematic in the Minetest Schematic (and metadata) to disk.
 -- Takes the same arguments as minetest.create_schematic
@@ -378,9 +274,7 @@ minetest.register_chatcommand("treset", {
 			minetest.chat_send_player(name, "An error occurred while loading Tutorial World schematic")
 		end
 
-		-- TODO: right now there's no clear way we can properly remove all entities
-		--remove_entities()
-		--load_entities()
+		-- TODO: re-load entities?
 	end,
 })
 
@@ -396,19 +290,6 @@ if insecure_environment then
 			else
 				minetest.chat_send_player(name, "An error occurred while saving Tutorial World schematic")
 			end
-		end,
-	})
-
-	minetest.register_chatcommand("tsave_entities", {
-		params = "",
-		description = "Saves the tutorial entities",
-		privs = {tutorialmap=true},
-		func = function(name, param)
-			for k,s in pairs(tutorial.map_sector) do
-				minetest.forceload_block(s)
-			end
-			local count = save_entities()
-			minetest.chat_send_player(name, count .. " entities saved")
 		end,
 	})
 end
