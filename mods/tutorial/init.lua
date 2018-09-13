@@ -216,13 +216,7 @@ The three modes are:
 You can change the camera mode by pressing [F7] (but you have to close this
 window first).
 
-There is also Cinematic Mode which can be toggled with [F8]. Normally, the
-camera moves instantly as you move your mouse around. With Cinematic
-Mode enabled, the camera movements become more smooth. Some players don't
-like it, it is a matter of taste.
-
-   Switch camera mode: [F7]
-   Toggle Cinematic Mode: [F8]]=]
+   Switch camera mode: [F7]]=]
 
 tutorial.texts.minimap =
 [=[Press the [F9] key to make a minimap appear on the top right.
@@ -873,7 +867,6 @@ tutorial.texts.controls =
    Move downwards (ladder/liquid): [Shift]
 
    Toggle camera mode: [F7]
-   Toggle Cinematic Mode: [F8]
    Toggle minimap mode: [F9]
 
    Select item in hotbar: [Mouse wheel]
