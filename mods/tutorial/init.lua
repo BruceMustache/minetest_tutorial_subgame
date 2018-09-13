@@ -1134,19 +1134,21 @@ minetest.register_node("tutorial:itemspawner", {
 					end
 				end
 			end
+		else
+			return
 		end
 		spawned = meta:get_int("spawned")
 		if spawned ~= 1 then
 			if itemstring ~= nil and itemstring ~= "" then
 				minetest.add_item(spawnpos, itemstring)
 				local timer = minetest.get_node_timer(pos)
-				timer:start(5)
+				timer:start(1)
 				return
 			end
 		end
 
 		local timer = minetest.get_node_timer(pos)
-		timer:start(5)
+		timer:start(1)
 	end,
 })
 
