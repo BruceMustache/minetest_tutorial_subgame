@@ -11,7 +11,7 @@ local function init_item_spawners(spawners)
 	local count = 0
 	for n=1, #spawners do
 		local timer = minetest.get_node_timer(spawners[n])
-		timer:start(0)
+		timer:start(3)
 		count = count + 1
 	end
 	minetest.log("action", "[tutorial] " .. count .. " item spawners initialized")
