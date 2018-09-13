@@ -87,7 +87,7 @@ local function load_entities_area(minp, maxp)
 	local count = 0
 	for n=1, #nodes do
 		local timer = minetest.get_node_timer(nodes[n])
-		timer:start(1)
+		timer:start(0)
 		count = count + 1
 	end
 	minetest.log("action", "[tutorial] " .. count .. " item spawners loaded")
@@ -97,7 +97,7 @@ local function init_item_spawners(spawners)
 	local count = 0
 	for n=1, #spawners do
 		local timer = minetest.get_node_timer(spawners[n])
-		timer:start(1)
+		timer:start(0)
 		count = count + 1
 	end
 	minetest.log("action", "[tutorial] " .. count .. " item spawners initialized")
