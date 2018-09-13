@@ -66,6 +66,7 @@ function tutorial.convert_newlines(str)
 end
 
 function tutorial.register_infosign(itemstringpart, caption, fulltext)
+	tutorial.captions[itemstringpart] = caption
 	minetest.register_node("tutorial:sign_"..itemstringpart, {
 		description = string.format(S("tutorial sign '%s'"), S(caption)),
 		drawtype = "signlike",
@@ -107,7 +108,7 @@ minetest.register_abm( {
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		local meta = minetest.get_meta(pos)
 		local id = meta:get_string("id")
-		local caption = meta:get_string("caption")
+		local caption = tutorial.captions[id]
 		local formspec = ""..
 			"size[12,6]"..
 			"label[-0.15,-0.4;"..minetest.formspec_escape(S(caption)).."]"..
@@ -160,31 +161,26 @@ Now feel free to walk around a bit and read the other signs to learn more.]]
 
 tutorial.texts.minetest =
 [[Minetest itself is not a game, it is a game engine.
-To be able to actually play it, you need something called a "Minetest game",
-sometimes also called "subgame" or just "game". In this tutorial, we use the term
-"subgame".
+To be able to actually play it, you need something called a "game".
 
-Don't worry, Minetest comes pre-installed with a rather simple default subgame,
+Don't worry, Minetest comes pre-installed with a rather simple default game,
 called "Minetest Game".
 
 This tutorial teaches you the basics of Minetest (the engine), things which are true for
-all subgames. This tutorial does not teach you how to play a particular subgame, not
-even the default one.
-
-Minetest as well as the default subgame are unfinished at the moment, so please forgive
-us when not everything works out perfectly.]]
+all games. This tutorial does not teach you how to play a particular game, not
+even the default one.]]
 
 tutorial.texts.subgame =
 [[Now since you probably now the basics, you may want to actually play or build something.
-Minetest comes bundled with a default subgame, which you may try out now.
-Sadly, there is currently no tutorial for the default subgame.
+Minetest comes bundled with a default game, which you may try out now.
+Sadly, there is currently no tutorial for the default game.
 You may want to read the "Getting Started" section of the Community Wiki,
-which is more specific about the default subgame.
+which is more specific about the default game.
 Said document can be found at:
 
 <http://wiki.minetest.net/Getting_Started>
 
-Alternatively, you may check out one of the subgames which are shared on the Minetest forums.]]
+Alternatively, you may check out one of the games which are shared on the Minetest forums.]]
 
 
 tutorial.texts.creative =
@@ -235,14 +231,14 @@ around you and changes with your height. Roughly, the more green an
 area is, the less "dense" it is. Black areas have many blocks. Use
 the radar to find caverns, hidden areas, walls and more. Currently,
 radar mode does not work in the tutorial. Sorry, you have to try it
-out in subgames.
+out in games.
 
 There are also two different direction modes. Normally, "up" on the minimap
 is always pointing to the North. But if you press [Shift]+[F9], the minimap
 will instead rotate with your looking direction, so "up" is always your
 looking direction.
 
-In some subgames, the minimap may be disabled.
+In some games, the minimap may be disabled.
 
    Toggle minimap mode: [F9]
    Toggle minimap rotating: [Shift]+[F9]]=]
@@ -254,7 +250,7 @@ Blocks can be added or removed with the correct tools.
 In this section, we'll show you a few special but common blocks which behave in unexpected,
 ways.,
 
-Of course, subgames can come up with more special weird blocks.]]
+Of course, games can come up with more special weird blocks.]]
 
 tutorial.texts.falling_node =
 [[Some blocks need to rest on top of another block, otherwise, they fall down.
@@ -485,7 +481,7 @@ mouse wheel or the number keys. You will learn more about tools in a different s
 tutorial.texts.health =
 [[Unless you have damage disabled, all players start with 20 hit points (HP), represented
 by ten hearts in the heads-up display. One HP is represented by half a heart in this
-tutorial, but the actual representation can vary from subgame to subgame.
+tutorial, but the actual representation can vary from game to game.
 
 You can take damage for the following reasons (including, but not limited to):
 - Falling too deep
@@ -494,7 +490,7 @@ You can take damage for the following reasons (including, but not limited to):
 - Staying too long in a liquid
 
 In this tutorial, you can regain health by eating a comestible. This is only an example,
-mods and subgames may come with other mechanisms to heal you.
+mods and games may come with other mechanisms to heal you.
 
 When you lose all your hit points, you die. Death is normally not really that bad in Minetest.
 When you die, you will usually lose all your possessions. You are able to put yourself
@@ -502,7 +498,7 @@ into the world immediately again. This is called "respawning". Normally you appe
 more or less random location.
 In the tutorial you can die, too, but don't worry about that. You will
 respawn at a special location you can't normally reach and keep all your posessions.
-Subgames may introduce special events on a player's death.]]
+Games may introduce special events on a player's death.]]
 
 tutorial.texts.death =
 [[Oops! So it seems you just have died. Don't worry, you don't have lost any of your
@@ -567,7 +563,7 @@ to carry along items throughout the world.
 Every inventory is made out of slots where you can store items in. You can store one
 entire stack of items per slot, the only condition is that the items are of the same
 type. In this tutorial all items except for tools stack up to 99 items, but this number
-can vary in actual subgames.
+can vary in actual games.
 
 Here are the controls which explain how to move around the items within the inventory:
 
@@ -654,7 +650,7 @@ different kinds of drops.]]
 tutorial.texts.mine_cobble =
 [[This is cobblestone. You can mine it with a pickaxe.
 This cobblestone will always drop itself, that means, cobblestone. Dropping itself is the
-usual dropping behaviour of a block, throughout many subgames.]]
+usual dropping behaviour of a block, throughout many games.]]
 
 tutorial.texts.mine_wood =
 [[These are wooden planks. In the tutorial, you can only mine those blocks with an axe.
@@ -760,10 +756,10 @@ smelt. Feel free to experiment with the furnace a bit. Smelt the gold lump to re
 this station's gold bar.
 
 Again, this furnace is just an example; the exact operation may differ slightly from
-subgame to subgame.]]
+game to game.]]
 
 tutorial.texts.repair =
-[[Some subgames may come with a special recipe which allows you to repair your tools.
+[[Some games may come with a special recipe which allows you to repair your tools.
 In those, repairing works always the same way:
 Place two more or less worn out tools of the same kind into the crafting crid and
 take the result. The result is a new tool which is slightly repaired by a fixed percentage.
@@ -900,7 +896,7 @@ this tutorial.
 
 Webforums: <http://forums.minetest.net/>
 A web-based discussion platform where you can discuss everything related to Minetest.
-This is also a place where player-made mods and subgames are published and
+This is also a place where player-made mods and games are published and
 discussed. The discussions are mainly in English, but there is also space for
 discussion in other languages.
 
@@ -909,6 +905,7 @@ A generic Internet Relay Chat channel for everything related to Minetest where p
 meet to discuss in real-time.
 If you do not understand IRC, see the Community Wiki for help.]]
 
+tutorial.captions = {}
 
 tutorial.register_infosign("intro", "Introduction", tutorial.texts.intro)
 tutorial.register_infosign("minetest", "Minetest", tutorial.texts.minetest)
@@ -962,7 +959,7 @@ tutorial.register_infosign("repair", "Repairing Tools", tutorial.texts.repair)
 tutorial.register_infosign("basic_end", "End of the Basic Tutorial", tutorial.texts.basic_end)
 tutorial.register_infosign("controls", "Controls Overview", tutorial.texts.controls)
 tutorial.register_infosign("online", "Online Resources", tutorial.texts.online)
-tutorial.register_infosign("subgame", "Subgames", tutorial.texts.subgame)
+tutorial.register_infosign("subgame", "Games", tutorial.texts.subgame)
 
 minetest.register_node("tutorial:wall", {
 	description = S("reinforced wall"),
