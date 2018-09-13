@@ -59,7 +59,7 @@ Other mods are creation by other people, but heavily modified to fit the Tutoria
 
 The mods “`default`” and “`creative`” falls under the GNU LGPLv2.1 for the code and the CC BY-SA 3.0 for artwork.
 The mod “`darkage`” falls under the MIT License.
-The mod “`mpd`” falls under the MIT License.
+The mod “`mpd`” falls under the MIT License for the code and the CC BY 3.0 for the music.
 The mod “`castle`” falls under the MIT License (the author allowed me an exception).
 The mod “`arrow_signs`” falls under the CC BY-SA 3.0.
 The mod “`areas`” falls under the GNU LGPLv2.1 (or later). 
@@ -73,3 +73,4 @@ For even more detailed information (including credits), look for README files in
 * GNU GPLv2: https://www.gnu.org/licenses/gpl-2.0.html
 * GNU LGPLv2.1: https://www.gnu.org/licenses/lgpl-2.1.html
 * CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/
+* CC BY 3.0: https://creativecommons.org/licenses/by/3.0/
