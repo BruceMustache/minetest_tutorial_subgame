@@ -1,7 +1,7 @@
 # Lib de Internacionalização para Minetest
 
 Por Diego Martínez (kaeza).
-Lançado como WTFPL.
+Lançado como MIT License.
 
 Este mod é uma tentativa de fornecer suporte de internacionalização para mods
 (algo que Minetest atualmente carece).

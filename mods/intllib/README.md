@@ -2,7 +2,7 @@
 # Internationalization Lib for Minetest
 
 By Diego Martínez (kaeza).
-Released as WTFPL.
+Released under MIT License.
 
 This mod is an attempt at providing internationalization support for mods
 (something Minetest currently lacks).

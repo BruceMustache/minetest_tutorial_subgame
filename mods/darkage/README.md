@@ -10,7 +10,7 @@ This mod originally created by MasterGollum and is now maintained and being impr
 
 **Depends:** default
 
-**License:** Code and textures, [WTFPL](http://www.wtfpl.net/txt/copying/)
+**License:** Code and textures, [MIT License](https://mit-license.org/)
 
 **Installation:** Unzip the file and rename it to "darkage". Then move it to the mod directory.
 

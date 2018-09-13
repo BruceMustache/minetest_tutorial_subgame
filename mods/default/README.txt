@@ -22,7 +22,7 @@ Authors of media files
 Everything not listed in here:
 Copyright (C) 2010-2012 celeron55, Perttu Ahola <celeron55@gmail.com>
 
-Cisoun's WTFPL texture pack:
+Cisoun's texture pack (MIT License):
   default_chest_front.png
   default_chest_lock.png
   default_chest_side.png
@@ -46,17 +46,17 @@ Originating from G4JC's Almost MC Texture Pack:
   default_torch_on_ceiling.png
   default_torch_on_floor.png
 
-VanessaE's animated torches (WTFPL):
+VanessaE's animated torches (MIT License):
   default_torch_animated.png
   default_torch_on_ceiling_animated.png
   default_torch_on_floor_animated.png
   default_torch_on_floor.png
 
-RealBadAngel's animated water (WTFPL):
+RealBadAngel's animated water (MIT License):
   default_water_source_animated.png
   default_water_flowing_animated.png
 
-VanessaE (WTFPL):
+VanessaE (MIT License):
   default_nc_back.png
   default_nc_front.png
   default_nc_rb.png
@@ -74,13 +74,13 @@ Calinou (CC BY-SA):
   default_copper_lump.png
   default_mineral_copper.png
 
-MirceaKitsune (WTFPL):
+MirceaKitsune (MIT License):
   character.x
 
 Jordach (CC BY-SA 3.0):
   character.png
 
-PilzAdam (WTFPL):
+PilzAdam (MIT License):
   default_jungleleaves.png
   default_junglesapling.png
   default_junglewood.png
@@ -90,10 +90,10 @@ PilzAdam (WTFPL):
   default_gold_lump.png
   default_mineral_gold.png
 
-jojoa1997 (WTFPL):
+jojoa1997 (MIT License):
   default_obsidian.png
 
-InfinityProject (WTFPL):
+InfinityProject (MIT License):
   default_mineral_diamond.png
 
 Zeg9 (CC BY-SA 3.0):

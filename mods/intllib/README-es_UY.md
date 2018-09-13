@@ -2,7 +2,7 @@
 # Biblioteca de Internacionalización para Minetest
 
 Por Diego Martínez (kaeza).
-Lanzada bajo WTFPL.
+Lanzada bajo MIT License.
 
 Éste mod es un intento de proveer soporte para internacionalización para otros mods
 (lo cual Minetest carece actualmente).
