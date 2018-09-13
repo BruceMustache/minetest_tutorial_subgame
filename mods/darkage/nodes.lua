@@ -108,7 +108,7 @@ minetest.register_node("darkage:iron_bars", {
 	paramtype = "light",
 	sunlight_propagates = true,
 	groups = {immortal=1},
-	sounds = default.node_sound_stone_defaults()
+	sounds = default.node_sound_metal_defaults()
 })
 
 minetest.register_node("darkage:iron_grille", {
@@ -119,5 +119,5 @@ minetest.register_node("darkage:iron_grille", {
 	sunlight_propagates = true,
 	paramtype = "light",
 	groups = {immortal=1},
-	sounds = default.node_sound_stone_defaults()
+	sounds = default.node_sound_metal_defaults()
 })

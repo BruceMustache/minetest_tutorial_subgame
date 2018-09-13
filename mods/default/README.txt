@@ -167,3 +167,11 @@ Mito551 (sounds) (CC BY-SA):
   default_dirt_footstep.1.ogg
   default_dirt_footstep.2.ogg
   default_glass_footstep.ogg
+
+sonictechtonic (CC BY 3.0):
+https://www.freesound.org/people/sonictechtonic/sounds/241872/
+  player_damage.ogg
+
+Metal sounds:
+  default_metal_footstep.ogg - Ottomaani138 - CC0
+  - https://www.freesound.org/people/Ottomaani138/sounds/232692/

@@ -175,7 +175,8 @@ for v=0,7 do
 		liquid_alternative_flowing = "supplemental:liquid"..v,
 		liquid_alternative_source = "supplemental:liquidsource"..v,
 		liquid_viscosity = v,
-		groups = {not_in_creative_inventory = 1}
+		groups = {not_in_creative_inventory = 1},
+		sounds = default.node_sound_water_defaults(),
 	})
 
 	minetest.register_node("supplemental:liquidsource"..v, {
@@ -202,5 +203,6 @@ for v=0,7 do
 		liquid_alternative_source = "supplemental:liquidsource"..v,
 		liquid_viscosity = v,
 		groups = {},
+		sounds = default.node_sound_water_defaults(),
 	})
 end
