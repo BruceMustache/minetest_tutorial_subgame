@@ -105,6 +105,7 @@ Zeg9 (CC BY-SA 3.0):
 
 paramat (CC BY-SA 3.0):
   wieldhand.png, based on character.png by Jordach (CC BY-SA 3.0)
+  default_grass_*.png
 
 brunob.santos (CC BY-SA 4.0):
   default_desert_cobble.png

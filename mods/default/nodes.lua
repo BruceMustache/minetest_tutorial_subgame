@@ -122,6 +122,20 @@ minetest.register_node("default:leaves", {
 	sounds = default.node_sound_leaves_defaults(),
 })
 
+minetest.register_node("default:grass_5", {
+	description = S("grass"),
+	tiles = {"default_grass_5.png"},
+	is_ground_content = true,
+	groups = {immortal=1},
+	sounds = default.node_sound_leaves_defaults(),
+	wield_image = "default_grass_5.png",
+	inventory_image = "default_grass_5.png",
+	drawtype = "plantlike",
+	sunlight_propagates = true,
+	paramtype = "light",
+	walkable = false,
+})
+
 minetest.register_node("default:ladder", {
 	description = S("ladder"),
 	drawtype = "signlike",
