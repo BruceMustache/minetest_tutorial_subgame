@@ -11,14 +11,14 @@ minetest.register_node("supplemental:sticky", {
 	tiles = {"default_stone_brick.png^supplemental_splat.png",
 		"default_stone_brick.png", "default_stone_brick.png", "default_stone_brick.png",
 		"default_stone_brick.png", "default_stone_brick.png"},
-	groups = {immortal=1, disable_jump=1},
+	groups = {creative_breakable=1, disable_jump=1},
 	sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node("supplemental:bouncy", {
 	description = S("bouncy block"),
 	tiles = {"supplemental_bouncy.png"},
-	groups = {immortal=1, bouncy=70, fall_damage_add_percent=-100},
+	groups = {creative_breakable=1, bouncy=70, fall_damage_add_percent=-100},
 	sounds = default.node_sound_stone_defaults()
 })
 
@@ -50,7 +50,7 @@ minetest.register_node("supplemental:frame",{
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	sunlight_propagates = true,
-	groups = { immortal=1, attached_node=1 },
+	groups = { creative_breakable=1, attached_node=1 },
 	legacy_wallmounted = true,
 	sounds = default.node_sound_defaults(),
 })
@@ -64,7 +64,7 @@ minetest.register_node("supplemental:spikes", {
 	paramtype = "light",
 	walkable = false,
 	drawtype = "plantlike",
-	groups = { immortal = 1 },
+	groups = { creative_breakable = 1 },
 	damage_per_second = 1,
 	collision_box = {
 		type = "fixed",
@@ -85,7 +85,7 @@ minetest.register_node("supplemental:spikes_large", {
 	paramtype = "light",
 	walkable = false,
 	drawtype = "plantlike",
-	groups = { immortal = 1 },
+	groups = { creative_breakable = 1 },
 	damage_per_second = 2
 })
 

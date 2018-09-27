@@ -79,7 +79,7 @@ function tutorial.register_infosign(itemstringpart, caption, fulltext)
 		is_ground_content = false,
 		walkable = false,
 		selection_box = { type = "wallmounted" },
-		groups = {immortal=1,attached_node=1,tutorial_sign=1},
+		groups = {creative_breakable=1,attached_node=1,tutorial_sign=1},
 		legacy_wallmounted = true,
 		sounds = default.node_sound_defaults(),
 		on_construct = function(pos)
@@ -990,7 +990,7 @@ minetest.register_node("tutorial:wall", {
 	description = S("reinforced wall"),
 	tiles = {"default_stone_brick.png"},
 	is_ground_content = true,
-	groups = {immortal=1},
+	groups = {creative_breakable=1},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -1001,7 +1001,7 @@ minetest.register_node("tutorial:reinforced_glass", {
 	inventory_image = minetest.inventorycube("tutorial_reinforced_glass.png"),
 	paramtype = "light",
 	sunlight_propagates = true,
-	groups = { immortal=1 },
+	groups = { creative_breakable=1 },
 	sounds = default.node_sound_glass_defaults(),
 })
 
@@ -1031,7 +1031,7 @@ minetest.register_tool("tutorial:snatcher", {
 minetest.register_node("tutorial:day", {
 	description = S("day/night switch (day)"),
 	tiles = { "tutorial_day.png" },
-	groups = {immortal=1},
+	groups = {creative_breakable=1},
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		minetest.set_timeofday(0)
 		minetest.set_node(pos, {name="tutorial:night"})
@@ -1040,7 +1040,7 @@ minetest.register_node("tutorial:day", {
 minetest.register_node("tutorial:night", {
 	description = S("day/night switch (night)"),
 	tiles = { "tutorial_night.png" },
-	groups = {immortal=1},
+	groups = {creative_breakable=1},
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		minetest.set_timeofday(0.5)
 		minetest.set_node(pos, {name="tutorial:day"})
@@ -1052,7 +1052,7 @@ It only works on a prepared map! ]]
 minetest.register_node("tutorial:waterfall_on", {
 	description = S("waterfall switch (on)"),
 	tiles = { "tutorial_waterfall_on.png" },
-	groups = {immortal=1},
+	groups = {creative_breakable=1},
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		local wpos = { y = 5, z = 86 }
 		for x=33,46 do
@@ -1066,7 +1066,7 @@ minetest.register_node("tutorial:waterfall_on", {
 minetest.register_node("tutorial:waterfall_off", {
 	description = S("waterfall switch (off)"),
 	tiles = { "tutorial_waterfall_off.png" },
-	groups = {immortal=1},
+	groups = {creative_breakable=1},
 	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
 		local wpos = { y = 5, z = 86 }
 		for x=33,46 do
@@ -1093,7 +1093,7 @@ minetest.register_node("tutorial:ruler", {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	sunlight_propagates = true,
-	groups = {immortal=1, attached_node=1},
+	groups = {creative_breakable=1, attached_node=1},
 })
 
 -- Item spawner
@@ -1111,7 +1111,7 @@ minetest.register_node("tutorial:itemspawner", {
 	wield_image = "unknown_node.png",
 	buildable_to = false,
 	sunlight_propagates = true,
-	groups = {immortal=1},
+	groups = {creative_breakable=1},
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_int("spawned", 0)
@@ -1217,7 +1217,7 @@ function tutorial.register_craftguide(subId, desc, imageStatic, imageAnim, animF
 		paramtype = "light",
 		paramtype2 = "wallmounted",
 		sunlight_propagates = true,
-		groups = {immortal=1, attached_node=1},
+		groups = {creative_breakable=1, attached_node=1},
 		on_construct = tutorial.craftguideinfo,
 	})
 
@@ -1277,7 +1277,7 @@ minetest.register_node("tutorial:cup_gold", {
 	drawtype = "nodebox",
 	node_box = tutorial.cupnodebox,
 	selection_box = tutorial.cupselbox,
-	groups = { immortal = 1 },
+	groups = { creative_breakable = 1 },
 	on_construct = tutorial.goldinfo,
 })
 
@@ -1289,7 +1289,7 @@ minetest.register_node("tutorial:cup_diamond", {
 	drawtype = "nodebox",
 	node_box = tutorial.cupnodebox,
 	selection_box = tutorial.cupselbox,
-	groups = { immortal = 1 },
+	groups = { creative_breakable = 1 },
 	on_construct = tutorial.diamondinfo,
 })
 

@@ -18,7 +18,7 @@ This mod originally created by MasterGollum and is now maintained and being impr
 **Version Development**
 **Tutorial Edition**
 * Stripped down mod to the neccessary parts for the tutorial
-* Made many nodes immortal
+* Made many nodes diggable in Creative Mode only
 
 **Version 1.3**
 

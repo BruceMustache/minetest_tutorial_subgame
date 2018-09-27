@@ -71,7 +71,7 @@ minetest.register_node("arrow_signs:wall_right", {
 	selection_box = {
 		type = "wallmounted",
 	},
-	groups = {immortal=1,attached_node=1,arrow_sign=1},
+	groups = {creative_breakable=1,attached_node=1,arrow_sign=1},
 	legacy_wallmounted = true,
 	sounds = default.node_sound_defaults(),
 	on_construct = function(pos)
@@ -103,7 +103,7 @@ minetest.register_node("arrow_signs:wall_left", {
 	selection_box = {
 		type = "wallmounted",
 	},
-	groups = {immortal=1,attached_node=1,arrow_sign=1},
+	groups = {creative_breakable=1,attached_node=1,arrow_sign=1},
 	legacy_wallmounted = true,
 	sounds = default.node_sound_defaults(),
 	on_construct = function(pos)
@@ -134,7 +134,7 @@ minetest.register_node("arrow_signs:wall_up", {
 	selection_box = {
 		type = "wallmounted",
 	},
-	groups = {immortal=1,attached_node=1,arrow_sign=1},
+	groups = {creative_breakable=1,attached_node=1,arrow_sign=1},
 	legacy_wallmounted = true,
 	sounds = default.node_sound_defaults(),
 	on_construct = function(pos)
@@ -165,7 +165,7 @@ minetest.register_node("arrow_signs:wall_down", {
 	selection_box = {
 		type = "wallmounted",
 	},
-	groups = {immortal=1,attached_node=1,arrow_sign=1},
+	groups = {creative_breakable=1,attached_node=1,arrow_sign=1},
 	legacy_wallmounted = true,
 	sounds = default.node_sound_defaults(),
 	on_construct = function(pos)

@@ -33,7 +33,7 @@ minetest.register_node("cottages:sleeping_mat", {
         paramtype2 = "facedir",
         is_ground_content = true,
         walkable = false,
-        groups = { immortal=1 },
+        groups = { creative_breakable=1 },
         sounds = default.node_sound_leaves_defaults(),
         selection_box = {
                         type = "wallmounted",
@@ -61,7 +61,7 @@ minetest.register_node("cottages:bench", {
 	tiles = {"cottages_minimal_wood.png", "cottages_minimal_wood.png",  "cottages_minimal_wood.png",  "cottages_minimal_wood.png",  "cottages_minimal_wood.png",  "cottages_minimal_wood.png"},
 	paramtype = "light",
 	paramtype2 = "facedir",
-        groups = { immortal=1 },
+	groups = { creative_breakable=1 },
 	sounds = default.node_sound_wood_defaults(),
 	node_box = {
 		type = "fixed",
@@ -92,7 +92,7 @@ minetest.register_node("cottages:table", {
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = true,
-        	groups = { immortal=1 },
+		groups = { creative_breakable=1 },
 		sounds = default.node_sound_wood_defaults(),
 		node_box = {
 			type = "fixed",

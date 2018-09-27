@@ -31,7 +31,7 @@ minetest.register_node("cottages:wagon_wheel", {
         selection_box = {
                 type = "wallmounted",
         },
-	groups = {immortal=1, attached_node=1},
+	groups = {creative_breakable=1, attached_node=1},
         legacy_wallmounted = true,
         sounds = default.node_sound_defaults(),
 })

@@ -12,7 +12,7 @@ minetest.register_node("castle:shield_2",{
 	drawtype="nodebox",
 	paramtype2 = "facedir",
 	paramtype = "light",
-	groups={immortal=1},
+	groups={creative_breakable=1},
 	node_box = {
 		type = "fixed",
 		fixed = {

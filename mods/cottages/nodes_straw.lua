@@ -25,7 +25,7 @@ minetest.register_node("cottages:straw_mat", {
         paramtype2 = "facedir",
         is_ground_content = true,
         walkable = false,
-	groups = {immortal=1},
+	groups = {creative_breakable=1},
         sounds = default.node_sound_leaves_defaults(),
 	node_box = {
 		type = "fixed",

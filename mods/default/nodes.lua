@@ -62,7 +62,7 @@ minetest.register_node("default:dirt_with_grass", {
 	description = S("dirt with grass"),
 	tiles = {"default_grass.png", "default_dirt.png", "default_dirt.png^default_grass_side.png"},
 	is_ground_content = true,
-	groups = {immortal=1},
+	groups = {creative_breakable=1},
 	drop = 'default:dirt',
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name="default_grass_footstep", gain=0.25},
@@ -73,7 +73,7 @@ minetest.register_node("default:dirt", {
 	description = S("dirt"),
 	tiles = {"default_dirt.png"},
 	is_ground_content = true,
-	groups = {immortal=1},
+	groups = {creative_breakable=1},
 	sounds = default.node_sound_dirt_defaults(),
 })
 
@@ -81,7 +81,7 @@ minetest.register_node("default:sand", {
 	description = S("sand"),
 	tiles = {"default_sand.png"},
 	is_ground_content = true,
-	groups = {immortal=1, falling_node=1},
+	groups = {creative_breakable=1, falling_node=1},
 	sounds = default.node_sound_sand_defaults(),
 })
 
@@ -90,7 +90,7 @@ minetest.register_node("default:tree", {
 	tiles = {"default_tree_top.png", "default_tree_top.png", "default_tree.png"},
 	paramtype2 = "facedir",
 	is_ground_content = false,
-	groups = {immortal=1},
+	groups = {creative_breakable=1},
 	sounds = default.node_sound_wood_defaults(),
 	on_place = minetest.rotate_node
 })
@@ -103,7 +103,7 @@ minetest.register_node("default:leaves", {
 	tiles = {"default_leaves.png"},
 	paramtype = "light",
 	is_ground_content = false,
-	groups = {immortal=1},
+	groups = {creative_breakable=1},
 	drop = {
 		max_items = 1,
 		items = {
@@ -126,7 +126,7 @@ minetest.register_node("default:grass_5", {
 	description = S("grass"),
 	tiles = {"default_grass_5.png"},
 	is_ground_content = true,
-	groups = {immortal=1},
+	groups = {creative_breakable=1},
 	sounds = default.node_sound_leaves_defaults(),
 	wield_image = "default_grass_5.png",
 	inventory_image = "default_grass_5.png",
@@ -150,7 +150,7 @@ minetest.register_node("default:ladder", {
 	selection_box = {
 		type = "wallmounted",
 	},
-	groups = {},
+	groups = {creative_breakable=1},
 	legacy_wallmounted = true,
 	sounds = default.node_sound_wood_defaults(),
 })
@@ -252,7 +252,7 @@ minetest.register_node("default:torch", {
 		wall_bottom = {-0.1, -0.5, -0.1, 0.1, -0.5+0.6, 0.1},
 		wall_side = {-0.5, -0.3, -0.1, -0.5+0.3, 0.3, 0.1},
 	},
-	groups = {immortal = 1},
+	groups = {creative_breakable = 1},
 	legacy_wallmounted = true,
 	sounds = default.node_sound_defaults(),
 })
@@ -279,7 +279,7 @@ minetest.register_node("default:chest", {
 	tiles = {"default_chest_top.png", "default_chest_top.png", "default_chest_side.png",
 		"default_chest_side.png", "default_chest_side.png", "default_chest_front.png"},
 	paramtype2 = "facedir",
-	groups = {immortal=1},
+	groups = {creative_breakable=1},
 	legacy_facedir_simple = true,
 	is_ground_content = false,
 	sounds = default.node_sound_wood_defaults(),
@@ -387,7 +387,7 @@ minetest.register_node("default:furnace", {
 	tiles = {"default_furnace_top.png", "default_furnace_bottom.png", "default_furnace_side.png",
 		"default_furnace_side.png", "default_furnace_side.png", "default_furnace_front.png"},
 	paramtype2 = "facedir",
-	groups = {immortal=1},
+	groups = {creative_breakable=1},
 	legacy_facedir_simple = true,
 	is_ground_content = false,
 	sounds = default.node_sound_stone_defaults(),
@@ -485,7 +485,7 @@ minetest.register_node("default:furnace_active", {
 	paramtype2 = "facedir",
 	light_source = 8,
 	drop = "default:furnace",
-	groups = {immortal=1,not_in_creative_inventory=1,hot=1},
+	groups = {creative_breakable=1,not_in_creative_inventory=1,hot=1},
 	legacy_facedir_simple = true,
 	is_ground_content = false,
 	sounds = default.node_sound_stone_defaults(),

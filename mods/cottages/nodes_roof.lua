@@ -22,7 +22,7 @@ cottages.register_roof = function( name, tiles, basic_material, homedecor_altern
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = true,
-		groups = {immortal=1},
+		groups = {creative_breakable=1},
 		node_box = {
 			type = "fixed",
 			fixed = {
@@ -51,7 +51,7 @@ cottages.register_roof = function( name, tiles, basic_material, homedecor_altern
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = true,
-		groups = {immortal=1},
+		groups = {creative_breakable=1},
 		node_box = {
 			type = "fixed",
 			fixed = {
@@ -80,7 +80,7 @@ cottages.register_roof = function( name, tiles, basic_material, homedecor_altern
 		paramtype = "light",
 		paramtype2 = "facedir",
 		is_ground_content = true,
-		groups = {immortal=1},
+		groups = {creative_breakable=1},
 		node_box = {
 			type = "fixed",
 			fixed = {	
