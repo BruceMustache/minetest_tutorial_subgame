@@ -1,4 +1,11 @@
+-- TUTORIAL MAP GENERATION
 
+-- == DEBUG SETTINGS ==
+-- If true, the generated tutorial map is in "map editing" mode, only generating
+-- the raw castle, no grass layer or other random decorations will be generated
+local map_editing = minetest.settings:get_bool("tutorial_debug_map_editing")
+
+-- == END OF DEBUG SETTINGS ==
 
 -- Directory where the map data will be stored
 tutorial.map_directory = minetest.get_modpath("tutorial").."/mapdata/"
@@ -333,38 +340,38 @@ minetest.register_on_generated(function(minp, maxp, seed)
 		end
 	end
 
-	-- Make grass
-	local grasslev = 0
-	if minp.y <= grasslev and maxp.y >= grasslev then
-		local vdata = vm:get_data(vbuffer)
-		local area = VoxelArea:new({MinEdge=emin, MaxEdge=emax})
-		local c_dirt_with_grass = minetest.get_content_id("default:dirt_with_grass")
-		local c_grass = minetest.get_content_id("default:grass_5")
-		local c_dirt = minetest.get_content_id("default:dirt_with_grass")
-		for x = minp.x, maxp.x do
-			for z = minp.z, maxp.z do
-				local p_pos = area:index(x, grasslev, z)
-				local p_pos_above
-				if minp.y <= grasslev+1 and maxp.y >= maxp.y then
-					p_pos_above = area:index(x, grasslev + 1, z)
-				end
-				local _, areas_count = areas:getAreasAtPos({x=x,y=grasslev,z=z})
-				if areas_count == 0 then
-					if vdata[p_pos] == minetest.CONTENT_AIR then
-						vdata[p_pos] = c_dirt_with_grass
-						if p_pos_above and vdata[p_pos_above] == minetest.CONTENT_AIR then
-							if math.random(0,50) == 0 then
-								vdata[p_pos_above] = c_grass
+	-- Generate a layer of grass for the outside area
+	if map_editing ~= true then
+		local grasslev = 0
+		if minp.y <= grasslev and maxp.y >= grasslev then
+			local vdata = vm:get_data(vbuffer)
+			local area = VoxelArea:new({MinEdge=emin, MaxEdge=emax})
+			local c_dirt_with_grass = minetest.get_content_id("default:dirt_with_grass")
+			local c_grass = minetest.get_content_id("default:grass_5")
+			for x = minp.x, maxp.x do
+				for z = minp.z, maxp.z do
+					local p_pos = area:index(x, grasslev, z)
+					local p_pos_above
+					if minp.y <= grasslev+1 and maxp.y >= maxp.y then
+						p_pos_above = area:index(x, grasslev + 1, z)
+					end
+					local _, areas_count = areas:getAreasAtPos({x=x,y=grasslev,z=z})
+					if areas_count == 0 then
+						if vdata[p_pos] == minetest.CONTENT_AIR then
+							vdata[p_pos] = c_dirt_with_grass
+							if p_pos_above and vdata[p_pos_above] == minetest.CONTENT_AIR then
+								if math.random(0,50) == 0 then
+									vdata[p_pos_above] = c_grass
+								end
 							end
 						end
 					end
 				end
 			end
+			vm:set_data(vdata)
+			state_changed = true
 		end
-		vm:set_data(vdata)
-		state_changed = true
 	end
-
 
 	if(state_changed) then
 		vm:calc_lighting(nil, nil, false)
