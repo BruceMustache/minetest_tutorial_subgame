@@ -85,6 +85,10 @@ Close
 Leave tutorial
 Go to Good-Bye room
 
+# Teleport dialog
+Select teleport destination:
+Good-Bye room
+
 # Items
 reinforced wall
 reinforced glass

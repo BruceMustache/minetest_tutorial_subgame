@@ -907,6 +907,31 @@ If you do not understand IRC, see the Community Wiki for help.]]
 
 tutorial.captions = {}
 
+tutorial.locations = {
+	intro = { { x = 42, y = 0.5, z = 28 }, math.pi * 0.5 },
+	jumpup = { { x = 64, y = 0.5, z = 30 }, math.pi * 1.5, math.pi * 0.2 },
+	ladder = { { x = 70, y = 0.5, z = 37 }, math.pi * 0.5 },
+	swim = { { x = 85, y = 0.5 , z = 50 }, math.pi * 0.5 },
+	dive = { { x = 59, y = 0.5 , z = 62 }, math.pi * 0.5 },
+	sneak = { { x = 33, y = 0.5, z = 41 }, math.pi * 0.5 },
+	eat = { { x = 67, y = -3.5, z = 60}, 0 },
+	health = { { x = 50, y = 0.5, z = 58 }, 0 },
+	viscosity = { { x = 44, y = 0.5, z = 53 }, 0, math.pi * 0.2 },
+	waterfall = { { x = 40, y = 0.5 , z = 81 }, 0 },
+	pointing1 = { { x = 89, y = 0.5, z = 62 }, math.pi * 0.5 },
+	items = { { x = 70, y = 0.5, z = 65 }, math.pi },
+	craft1 = { { x = 74, y = 0.5, z = 59 }, math.pi * 1.5 },
+	repair = { { x = 80, y = 0.5, z = 59 }, math.pi },
+	smelt = { { x = 78, y = 4.5, z = 63 }, math.pi * 1.5 },
+	mine = { { x = 79, y = 0.5, z = 75 }, 0, math.pi * 0.2 },
+	build = { { x = 66, y = 0.5, z = 83 }, math.pi },
+	goodbye = { { x = 22.5, y = 0.5, z = 73 }, math.pi * 0.5 },
+}
+
+tutorial.locations_order = {
+	"intro", "jumpup", "pointing1", "items", "eat", "craft1", "repair", "smelt", "mine", "build", "swim", "dive", "viscosity", "waterfall", "health", "sneak", "goodbye"
+}
+
 tutorial.register_infosign("intro", "Introduction", tutorial.texts.intro)
 tutorial.register_infosign("minetest", "Minetest", tutorial.texts.minetest)
 tutorial.register_infosign("cam", "Player Camera", tutorial.texts.cam)
@@ -1346,15 +1371,49 @@ minetest.register_on_joinplayer(function(player)
 end
 )
 
+local teleport_dialog = function(player)
+	local formspec = "size[10,10]" ..
+	"label[0,0;"..minetest.formspec_escape(S("Select teleport destination:")).."]"
+	local y = 1
+	local x = 0
+	local id, data
+	for i = 1, #tutorial.locations_order do
+		local id = tutorial.locations_order[i]
+		local data = tutorial.locations[id]
+		local caption
+		if id == "goodbye" then
+			caption = S("Good-Bye room")
+		else
+			caption = S(tutorial.captions[id])
+		end
+		formspec = formspec .. "button_exit["..x..","..y..";5,1;".."teleport_"..id..";"..minetest.formspec_escape(caption).."]"
+		y = y + 1
+		if y > 9 then
+			y = 1
+			x = x + 5
+		end
+	end
+	minetest.show_formspec(player:get_player_name(), "tutorial_teleport", formspec)
+end
+
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if(fields.leave) then
 		minetest.kick_player(player:get_player_name(), S("You have voluntarily exited the tutorial."))
-	end
-	if(fields.gotostart) then
-		tutorial.back_to_start(player)
-	end
-	if(fields.gotoend) then
+		return
+	elseif(fields.teleport) then
+		teleport_dialog(player)
+		return
+	elseif(fields.gotoend) then
 		tutorial.go_to_end(player)
+		return
+	end
+	if formname == "tutorial_teleport" then
+		for id, data in pairs(tutorial.locations) do
+			if(fields["teleport_"..id]) then
+				tutorial.teleport(player, data[1], data[2], data[3])
+				break
+			end
+		end
 	end
 end)
 
@@ -1450,16 +1509,21 @@ minetest.register_globalstep(function(dtime)
 	end
 end)
 
+function tutorial.teleport(player, pos, look_horizontal, look_vertical)
+	player:setpos(pos)
+	player:set_look_horizontal(look_horizontal)
+	if not look_vertical then
+		look_vertical = 0
+	end
+	player:set_look_vertical(look_vertical)
+end
+
 function tutorial.back_to_start(player)
-	player:setpos({x=42,y=0.5,z=28})
-	player:set_look_yaw(math.atan(1)*2)
-	player:set_look_pitch(0)
+	tutorial.teleport(player, tutorial.locations.intro[1], tutorial.locations.intro[2])
 end
 
 function tutorial.go_to_end(player)
-	player:setpos({x=23,y=0.5,z=73})
-	player:set_look_yaw(math.atan(1)*2)
-	player:set_look_pitch(0)
+	tutorial.teleport(player, tutorial.locations.goodbye[1], tutorial.locations.goodbye[2])
 end
 
 --[[
