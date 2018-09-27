@@ -43,7 +43,18 @@ mpd.time_next=10 --sekunden
 mpd.id_last_played=nil
 
 minetest.register_on_joinplayer(function(player)
-	mpd.next_song()
+	local play_music = player:get_attribute("play_music")
+	local play = true
+	if play_music == "" then
+		player:set_attribute("play_music", "1")
+	elseif play_music == "0" then
+		play = false
+	end
+	if play then
+		mpd.next_song()
+	else
+		mpd.stop_song()
+	end
 end)
 
 minetest.register_globalstep(function(dtime)
@@ -113,6 +124,8 @@ minetest.register_chatcommand("mpd_stop", {
 	description = "Stop the song currently playing",
 	privs = {mpd=true},
 	func = function(name, param)
+		local player = minetest.get_player_by_name(name)
+		player:set_attribute("play_music", "0")
 		mpd.stop_song()
 	end,		
 })
@@ -133,6 +146,8 @@ minetest.register_chatcommand("mpd_play", {
 	func = function(name, param)
 		id=tonumber(param)
 		if id and id>0 and id<=#mpd.songs then
+			local player = minetest.get_player_by_name(name)
+			player:set_attribute("play_music", "1")
 			mpd.play_song(id)
 			return true,"Playing: "..mpd.song_human_readable(id)
 		end
@@ -153,6 +168,8 @@ minetest.register_chatcommand("mpd_next", {
 	description = "Start the next song, either immediately (no parameters) or after n seconds.",
 	privs = {mpd=true},
 	func = function(name, param)
+		local player = minetest.get_player_by_name(name)
+		player:set_attribute("play_music", "1")
 		mpd.stop_song()
 		if param and tonumber(param) then
 			mpd.time_next=tonumber(param)
@@ -202,8 +219,10 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if(fields.togglemusic) then
 		if mpd.playing then
 			mpd.stop_song()
+			player:set_attribute("play_music", "0")
 		else
 			mpd.next_song()
+			player:set_attribute("play_music", "1")
 		end
 	end
 end)
