@@ -2,7 +2,7 @@
 
 Created by Wuzzy
 
-Version: 2.3.0
+Version: 2.4.0
 
 Learn how to use and play Minetest in a nice and cozy castle. Here you learn most of the basics of Minetest and how to play.
 
