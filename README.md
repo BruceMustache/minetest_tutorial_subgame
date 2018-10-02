@@ -1,4 +1,4 @@
-= Tutorial for Minetest =
+# Tutorial for Minetest
 
 Created by Wuzzy
 
@@ -6,7 +6,7 @@ Version: 2.4.0
 
 Learn how to use and play Minetest in a nice and cozy castle. Here you learn most of the basics of Minetest and how to play.
 
-== How to install ==
+## How to install
 First, you have to install Minetest.
 
 Then, put this "tutorial" directory into the "games" sub-directory of your Minetest user directory.
@@ -18,15 +18,15 @@ Depending on your operating system, you have to put it into the following direct
 * Windows: into the "games" sub-directory of the program folder in which you have installed Minetest. It is the directory containing the directories (not necessarily exhaustive list) bin (which in turn contains minetest.exe), builtin, client, doc, fonts, games, locale, mods and textures. 
 
 
-== How to use ==
+## How to use
 Start Minetest, select “Local Game” (i.e. singleplayer) then select the “Tutorial” icon below.
 
 Create a new world and hit “Play”. The Tutorial should explain the rest.
 
-== Resetting the tutorial ==
+## Resetting the tutorial
 In case you want to start over, you can just create a new world and play with that one instead.
 
-== Features ==
+## Features
 The tutorial covers the following topics:
 
 * Minetest, mods and games
@@ -50,7 +50,7 @@ If you have completed all tasks, you will be awarded a golden cup.
 There's also a secret prize, can you win it?
 
 
-== Legalities ==
+## Legalities
 This tutorial is free software. You can legally study, copy, share, transform, remix, distribute this to your liking, under certain conditions.
 
 The mods “`tutorial`” and “supplemental” as well the tutorial world are original work by Wuzzy and fall under the MIT License.
@@ -68,7 +68,7 @@ Everything else falls under the MIT License.
 
 For even more detailed information (including credits), look for README files in the respective mod directories.
 
-=== License references ===
+### License references
 * MIT License: https://mit-license.org/
 * GNU GPLv2: https://www.gnu.org/licenses/gpl-2.0.html
 * GNU LGPLv2.1: https://www.gnu.org/licenses/lgpl-2.1.html
