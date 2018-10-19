@@ -1,5 +1,11 @@
 tutorial = {}
 
+-- == DEBUG SETTINGS ==
+-- If true, item spawner nodes become visible and pointable.
+local edit_item_spawners = minetest.settings:get_bool("tutorial_debug_edit_item_spawners")
+
+-- == END OF DEBUG SETTINGS ==
+
 -- intllib support
 local S
 if (minetest.get_modpath("intllib")) then
@@ -1096,17 +1102,36 @@ minetest.register_node("tutorial:ruler", {
 	groups = {creative_breakable=1, attached_node=1},
 })
 
+local is_drawtype, is_pointable, is_diggable, is_air_equivalent, is_tiles
+-- Make some changes to item spawner node if debug setting is active
+if edit_item_spawners then
+	-- This makes the item spawner visible and clickable
+	is_drawtype = "glasslike"
+	is_pointable = true
+	is_diggable = true
+	is_air_equivalent = false
+	is_tiles = { "tutorial_item_spawner.png" }
+else
+	-- Normal invisible non-pointable non-editable item spawner
+	is_drawtype = "airlike"
+	is_pointable = false
+	is_diggable = false
+	is_air_equivalent = true
+	is_tiles = nil
+end
+
 -- Item spawner
 minetest.register_node("tutorial:itemspawner", {
 	description = S("item spawner"),
-	drawtype = "airlike",
 	paramtype = "light",
 	walkable = false,
-	-- Set to true if you want to edit
-	pointable = false,
+	-- See above
+	drawtype = is_drawtype,
+	pointable = is_pointable,
+	diggable = is_diggable,
+	air_equivalent = is_air_equivalent,
+	tiles = is_tiles,
 	floodable = false,
-	air_equivalent = true,
-	diggable = false,
 	inventory_image = "tutorial_item_spawner.png",
 	wield_image = "tutorial_item_spawner.png",
 	buildable_to = false,
