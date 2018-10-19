@@ -150,7 +150,7 @@ minetest.register_node("default:ladder", {
 	selection_box = {
 		type = "wallmounted",
 	},
-	groups = {creative_breakable=1},
+	groups = {attached_node=1,creative_breakable=1},
 	legacy_wallmounted = true,
 	sounds = default.node_sound_wood_defaults(),
 })
@@ -252,7 +252,7 @@ minetest.register_node("default:torch", {
 		wall_bottom = {-0.1, -0.5, -0.1, 0.1, -0.5+0.6, 0.1},
 		wall_side = {-0.5, -0.3, -0.1, -0.5+0.3, 0.3, 0.1},
 	},
-	groups = {creative_breakable = 1},
+	groups = {attached_node=1,creative_breakable = 1},
 	legacy_wallmounted = true,
 	sounds = default.node_sound_defaults(),
 })
