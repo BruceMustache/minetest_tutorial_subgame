@@ -1180,7 +1180,15 @@ minetest.register_node("tutorial:itemspawner", {
 				local ent = objs[o]:get_luaentity()
 				if ent then
 					if ent.name == "__builtin:item" and ent.itemstring == itemstring then
-						meta:set_int("spawned", 1)
+						if not edit_item_spawners then
+							-- Remove node when item was spawned successfully.
+							-- So it doesn't get in the way.
+							minetest.remove_node(pos)
+							return
+						else
+							-- Keep node in editing mode
+							meta:set_int("spawned", 1)
+						end
 					end
 				end
 			end
