@@ -89,6 +89,38 @@ minetest.register_node("supplemental:spikes_large", {
 	damage_per_second = 2
 })
 
+-- TODO: Remove the loudspeaker node when there is a more user-friendly means
+-- to control the music.
+local set_loudspeaker_infotext = function(pos)
+	local meta = minetest.get_meta(pos)
+	meta:set_string("infotext", S("loudspeaker (rightclick to toggle music)"))
+end
+
+minetest.register_node("supplemental:loudspeaker", {
+	description = S("loudspeaker"),
+	tiles = {"supplemental_loudspeaker.png"},
+	groups = { creative_breakable = 1 },
+	sounds = default.node_sound_wood_defaults(),
+	on_construct = set_loudspeaker_infotext,
+	on_rightclick = function(pos, node, clicker)
+		if mpd.playing then
+			mpd.stop_song()
+			clicker:set_attribute("play_music", "0")
+		else
+			mpd.next_song()
+			clicker:set_attribute("play_music", "1")
+		end
+	end,
+
+})
+
+minetest.register_abm({
+	nodenames = { "supplemental:loudspeaker" },
+	interval = 5,
+	chance = 1,
+	action = set_loudspeaker_infotext,
+})
+
 minetest.register_craftitem("supplemental:rock", {
 	description = S("piece of rock"),
 	inventory_image = "supplemental_rock.png",

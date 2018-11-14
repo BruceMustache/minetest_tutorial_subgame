@@ -11,6 +11,8 @@ purple sheet of paper
 green sheet of paper
 wheat
 piece of rock
+loudspeaker
+loudspeaker (rightclick to toggle music)
 # Test liquids are those seen at the viscosity station
 flowing test liquid %i
 test liquid source %i

@@ -64,6 +64,8 @@ The mod “`castle`” falls under the MIT License (the author allowed me an exc
 The mod “`arrow_signs`” falls under the CC BY-SA 3.0.
 The mod “`areas`” falls under the GNU LGPLv2.1 (or later). 
 The mod “`cottages`” falls under the GNU GPLv2 (the author allowed me an exception).
+The mod “`supplemental`” falls under the MIT License, with one exception:
+The texture `supplemental_loudspeaker.png` falls under the CC BY-SA 3.0 (from the developers of the Mesecons mod).
 Everything else falls under the MIT License.
 
 For even more detailed information (including credits), look for README files in the respective mod directories.

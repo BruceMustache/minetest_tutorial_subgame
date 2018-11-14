@@ -11,6 +11,8 @@ purple sheet of paper = violettes Blatt Papier
 green sheet of paper = grünes Blatt Papier
 wheat = Weizen
 piece of rock = Stück Stein
+loudspeaker = Lautsprecher
+loudspeaker (rightclick to toggle music) = Lautsprecher (Rechtsklick, um Musik umzuschalten)
 # Test liquids are those seen at the viscosity station
 flowing test liquid %i = fließende Testflüssigkeit %i
 test liquid source %i = Testflüssigkeitsquelle %i
