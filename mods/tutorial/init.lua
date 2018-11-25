@@ -1139,7 +1139,6 @@ minetest.register_node("tutorial:itemspawner", {
 	groups = {creative_breakable=1},
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
-		meta:set_int("spawned", 0)
 		meta:set_int("configged", 0)
 		local formspec = ""..
 		"size[12,6]"..
@@ -1165,7 +1164,7 @@ minetest.register_node("tutorial:itemspawner", {
 	end,
 	on_timer = function(pos, elapsed)
 		local meta = minetest.get_meta(pos)
-		if meta:get_int("configged") == 0 then
+		if meta:get_int("configged") == 0 or edit_item_spawners then
 			return
 		end
 
@@ -1174,35 +1173,22 @@ minetest.register_node("tutorial:itemspawner", {
 		local x, y, z = offset.x, offset.y, offset.z
 		local spawnpos = {x=pos.x+x, y=pos.y+y, z=pos.z+z}
 		local objs = minetest.get_objects_inside_radius(spawnpos, 1)
-		local spawned = meta:get_int("spawned")
-		if spawned ~= 1 then
-			for o=1, #objs do
-				local ent = objs[o]:get_luaentity()
-				if ent then
-					if ent.name == "__builtin:item" and ent.itemstring == itemstring then
-						if not edit_item_spawners then
-							-- Remove node when item was spawned successfully.
-							-- So it doesn't get in the way.
-							minetest.remove_node(pos)
-							return
-						else
-							-- Keep node in editing mode
-							meta:set_int("spawned", 1)
-						end
-					end
+		for o=1, #objs do
+			local ent = objs[o]:get_luaentity()
+			if ent then
+				if ent.name == "__builtin:item" and ent.itemstring == itemstring then
+					-- Remove node when item was spawned successfully.
+					-- So it doesn't get in the way.
+					minetest.remove_node(pos)
+					return
 				end
 			end
-		else
-			return
 		end
-		spawned = meta:get_int("spawned")
-		if spawned ~= 1 then
-			if itemstring ~= nil and itemstring ~= "" then
-				minetest.add_item(spawnpos, itemstring)
-				local timer = minetest.get_node_timer(pos)
-				timer:start(1)
-				return
-			end
+		if itemstring ~= nil and itemstring ~= "" then
+			minetest.add_item(spawnpos, itemstring)
+			local timer = minetest.get_node_timer(pos)
+			timer:start(1)
+			return
 		end
 
 		local timer = minetest.get_node_timer(pos)
