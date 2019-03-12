@@ -19,9 +19,9 @@ Depending on your operating system, you have to put it into the following direct
 
 
 ## How to use
-Start Minetest, select “Local Game” (i.e. singleplayer) then select the “Tutorial” icon below.
+Start Minetest, select “Start Game” (i.e. singleplayer) then select the “Tutorial” icon below.
 
-Create a new world and hit “Play”. The Tutorial should explain the rest.
+Create a new world and hit “Play Game”. The Tutorial should explain the rest.
 
 ## Resetting the tutorial
 In case you want to start over, you can just create a new world and play with that one instead.
