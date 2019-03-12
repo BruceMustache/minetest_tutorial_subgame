@@ -1356,7 +1356,7 @@ minetest.register_on_joinplayer(function(player)
 		"]"..
 		"button_exit[2.5,5.5;3,1;close;"..minetest.formspec_escape(S("Continue anyways")).."]"..
 		"button_exit[6.5,5.5;3,1;leave;"..minetest.formspec_escape(S("Leave tutorial")).."]"
-	elseif(minetest.setting_getbool("creative_mode")) then
+	elseif(minetest.settings:get_bool("creative_mode")) then
 		formspec = "size[12,6]"..
 		"label[-0.15,-0.4;"..(minetest.formspec_escape(S("Warning: Creative mode is active"))).."]"..
 		"tablecolumns[text]"..
@@ -1379,8 +1379,8 @@ minetest.register_on_joinplayer(function(player)
 		tutorial.state.intro_text = true
 	end
 	if tutorial.state.first_join==true and tutorial.first_spawn then
-		player:setpos(tutorial.first_spawn.pos)
-		player:set_look_yaw(tutorial.first_spawn.yaw)
+		player:set_pos(tutorial.first_spawn.pos)
+		player:set_look_horizontal(tutorial.first_spawn.yaw)
 		tutorial.state.first_join = false
 	end
 	tutorial.save_state()
@@ -1444,7 +1444,7 @@ minetest.register_globalstep(function(dtime)
 		for p=1,#players do
 			local player = players[p]
 			local name = player:get_player_name()
-			if(player:getpos().y < -12 and (not minetest.setting_getbool("creative_mode"))) then
+			if(player:get_pos().y < -12 and (not minetest.settings:get_bool("creative_mode"))) then
 			-- teleport players back to the start when they fell away
 				tutorial.back_to_start(player)
 				tutorial.show_default_dialog(name, S("You fell from the castle!"), tutorial.texts.fallout)
@@ -1529,7 +1529,7 @@ minetest.register_globalstep(function(dtime)
 end)
 
 function tutorial.teleport(player, pos, look_horizontal, look_vertical)
-	player:setpos(pos)
+	player:set_pos(pos)
 	player:set_look_horizontal(look_horizontal)
 	if not look_vertical then
 		look_vertical = 0

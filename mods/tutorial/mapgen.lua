@@ -386,9 +386,9 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	end
 end)
 
-minetest.register_on_mapgen_init(function(mgparams)
-	minetest.set_mapgen_params({mgname="singlenode", water_level=-31000, chunksize=(tutorial.sector_size/16)})
-end)
+minetest.set_mapgen_setting("mg_name", "singlenode")
+minetest.set_mapgen_setting("water_level", "-31000")
+minetest.set_mapgen_setting("chunksize", tostring(tutorial.sector_size/16))
 
 -- coordinates for the first time the player spawns
 tutorial.first_spawn = { pos={x=42,y=0.5,z=28}, yaw=(math.pi * 0.5) }

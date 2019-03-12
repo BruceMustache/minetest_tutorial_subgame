@@ -15,7 +15,7 @@ dofile(areas.modpath.."/hud.lua")
 
 areas:load()
 
-if minetest.setting_getbool("log_mod") then
+if minetest.settings:get_bool("log_mod") then
 	local diffTime = os.clock() - areas.startTime
 	minetest.log("action", "Modified areas mod loaded in "..diffTime.."s.")
 end
