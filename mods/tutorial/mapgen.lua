@@ -377,12 +377,6 @@ minetest.register_on_generated(function(minp, maxp, seed)
 		vm:calc_lighting(nil, nil, false)
 		vm:write_to_map()
 		tutorial.save_state()
-		-- Update the lgihting of the sector below as well
-		minp.y = minp.y - tutorial.sector_size
-		local vm = minetest.get_voxel_manip(minp, maxp)
-		vm:calc_lighting(nil, nil, false)
-		vm:write_to_map()
-		vm:update_map()
 	end
 end)
 
