@@ -2,12 +2,20 @@
 
 Created by Wuzzy
 
-Version: 2.5.1
+Version: 3.0.0
+Playable in Minetest 5.0.0 or later.
 
 Learn how to use and play Minetest in a nice and cozy castle. Here you learn most of the basics of Minetest and how to play.
 
 ## How to install
 First, you have to install Minetest.
+
+You can download the Tutorial from the Content DB in Minetest ("Content" tab).
+Minetest will then dothe rest for you.
+
+### Manual installation
+If for some reason the Content DB doesnt work, you can still fall back to manual installation.
+If you have manually downloaded the Tutorial (e.g. from the Minetest forums), here's how to install it:
 
 Then, put this "tutorial" directory into the "games" sub-directory of your Minetest user directory.
 
