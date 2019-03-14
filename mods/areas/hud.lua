@@ -14,8 +14,9 @@ minetest.register_globalstep(function(dtime)
 		local pos = vector.round(player:get_pos())
 		local areaStrings = {}
 		for id, area in pairs(areas:getAreasAtPos(pos)) do
-			table.insert(areaStrings, (S("You are here: %s"))
-					:format(S(area.name)))
+			if not area.hidden then
+				table.insert(areaStrings, (S("You are here: %s")):format(S(area.name)))
+			end
 		end
 		local areaString = table.concat(areaStrings, "\n")
 		local hud = areas.hud[name]
