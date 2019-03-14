@@ -2,7 +2,10 @@
 
 -- == DEBUG SETTINGS ==
 -- If true, the generated tutorial map is in "map editing" mode, only generating
--- the raw castle, no grass layer or other random decorations will be generated
+-- the raw castle, no grass layer or other random decorations will be generated.
+-- Also, 2 commands to manage the schematic will be available:
+-- /treset and /tsave commands will be available.
+-- (/tsave only if tutorial is trusted mod)
 local map_editing = minetest.settings:get_bool("tutorial_debug_map_editing")
 
 -- == END OF DEBUG SETTINGS ==
@@ -273,36 +276,38 @@ end
 
 ------ Commands
 
-minetest.register_privilege("tutorialmap", "Can use commands to manage the tutorial map")
-minetest.register_chatcommand("treset", {
-	params = "",
-	description = "Resets the tutorial map",
-	privs = {tutorialmap=true},
-	func = function(name, param)
-		if load_schematic() then
-			minetest.chat_send_player(name, "Tutorial World schematic loaded")
-		else
-			minetest.chat_send_player(name, "An error occurred while loading Tutorial World schematic")
-		end
-
-		-- TODO: re-load entities?
-	end,
-})
-
--- Add commands for saving map and entities, but only if tutorial mod is trusted
-if insecure_environment then
-	minetest.register_chatcommand("tsave", {
+if map_editing then
+	minetest.register_privilege("tutorialmap", "Can use commands to manage the tutorial map")
+	minetest.register_chatcommand("treset", {
 		params = "",
-		description = "Saves the tutorial map",
+		description = "Resets the tutorial map",
 		privs = {tutorialmap=true},
 		func = function(name, param)
-			if save_schematic() then
-				minetest.chat_send_player(name, "Tutorial World schematic saved")
+			if load_schematic() then
+				minetest.chat_send_player(name, "Tutorial World schematic loaded")
 			else
-				minetest.chat_send_player(name, "An error occurred while saving Tutorial World schematic")
+				minetest.chat_send_player(name, "An error occurred while loading Tutorial World schematic")
 			end
+
+			-- TODO: re-load entities?
 		end,
 	})
+
+	-- Add commands for saving map and entities, but only if tutorial mod is trusted
+	if insecure_environment then
+		minetest.register_chatcommand("tsave", {
+			params = "",
+			description = "Saves the tutorial map",
+			privs = {tutorialmap=true},
+			func = function(name, param)
+				if save_schematic() then
+					minetest.chat_send_player(name, "Tutorial World schematic saved")
+				else
+					minetest.chat_send_player(name, "An error occurred while saving Tutorial World schematic")
+				end
+			end,
+		})
+	end
 end
 
 ------ Map Generation
