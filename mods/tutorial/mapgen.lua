@@ -347,7 +347,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	-- Generate a flat grass land and a dirt-only underground for the rest of the map
 	if map_editing ~= true then
 		local grasslev = 0
-		if minp.y <= grasslev and maxp.y >= grasslev then
+		if minp.y <= grasslev then
 			local vdata = vm:get_data(vbuffer)
 			local area = VoxelArea:new({MinEdge=emin, MaxEdge=emax})
 			for x = minp.x, maxp.x do
