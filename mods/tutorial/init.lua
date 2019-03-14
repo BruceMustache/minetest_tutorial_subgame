@@ -812,13 +812,6 @@ to the main menu or quit Minetest.
 In the next room there are some further signs with information, but it is entirely optional
 and not related to gameplay.]]
 
-tutorial.texts.fallout =
-[[You somehow managed to fall from the castle or got otherwise below it!
-How did you do that?
-
-Anyways, you've got teleported back to the starting location. Whatever you did, be more
-careful next time.]]
-
 tutorial.texts.first_gold =
 [[You have collected your first gold ingot. Those will help you to keep track in this tutorial.
 There are 13 gold ingots in this tutorial.
@@ -1444,12 +1437,7 @@ minetest.register_globalstep(function(dtime)
 		for p=1,#players do
 			local player = players[p]
 			local name = player:get_player_name()
-			if(player:get_pos().y < -12 and (not minetest.settings:get_bool("creative_mode"))) then
-			-- teleport players back to the start when they fell away
-				tutorial.back_to_start(player)
-				tutorial.show_default_dialog(name, S("You fell from the castle!"), tutorial.texts.fallout)
-
-			else
+			do
 				local inv = player:get_inventory()
 				local state_changed = false
 
