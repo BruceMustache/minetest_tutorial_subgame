@@ -7,6 +7,10 @@ local map_editing = minetest.settings:get_bool("tutorial_debug_map_editing")
 
 -- == END OF DEBUG SETTINGS ==
 
+local c_dirt = minetest.get_content_id("default:dirt")
+local c_dirt_with_grass = minetest.get_content_id("default:dirt_with_grass")
+local c_grass = minetest.get_content_id("default:grass_5")
+
 -- Directory where the map data will be stored
 tutorial.map_directory = minetest.get_modpath("tutorial").."/mapdata/"
 
@@ -340,29 +344,31 @@ minetest.register_on_generated(function(minp, maxp, seed)
 		end
 	end
 
-	-- Generate a layer of grass for the outside area
+	-- Generate a flat grass land and a dirt-only underground for the rest of the map
 	if map_editing ~= true then
 		local grasslev = 0
 		if minp.y <= grasslev and maxp.y >= grasslev then
 			local vdata = vm:get_data(vbuffer)
 			local area = VoxelArea:new({MinEdge=emin, MaxEdge=emax})
-			local c_dirt_with_grass = minetest.get_content_id("default:dirt_with_grass")
-			local c_grass = minetest.get_content_id("default:grass_5")
 			for x = minp.x, maxp.x do
 				for z = minp.z, maxp.z do
-					local p_pos = area:index(x, grasslev, z)
-					local p_pos_above
-					if minp.y <= grasslev+1 and maxp.y >= maxp.y then
-						p_pos_above = area:index(x, grasslev + 1, z)
-					end
-					local _, areas_count = areas:getAreasAtPos({x=x,y=grasslev,z=z})
-					if areas_count == 0 then
-						if vdata[p_pos] == minetest.CONTENT_AIR then
-							vdata[p_pos] = c_dirt_with_grass
-							if p_pos_above and vdata[p_pos_above] == minetest.CONTENT_AIR then
-								if math.random(0,50) == 0 then
-									vdata[p_pos_above] = c_grass
+					for y = minp.y, maxp.y do
+						local p_pos = area:index(x, y, z)
+						local p_pos_above
+						if minp.y <= grasslev+1 and maxp.y >= maxp.y then
+							p_pos_above = area:index(x, y + 1, z)
+						end
+						local _, areas_count = areas:getAreasAtPos({x=x,y=y,z=z})
+						if areas_count == 0 and vdata[p_pos] == minetest.CONTENT_AIR then
+							if y == grasslev then
+								vdata[p_pos] = c_dirt_with_grass
+								if p_pos_above and vdata[p_pos_above] == minetest.CONTENT_AIR then
+									if math.random(0,50) == 0 then
+										vdata[p_pos_above] = c_grass
+									end
 								end
+							elseif y < grasslev then
+								vdata[p_pos] = c_dirt
 							end
 						end
 					end
