@@ -64,7 +64,7 @@ minetest.register_node("supplemental:spikes", {
 	paramtype = "light",
 	walkable = false,
 	drawtype = "plantlike",
-	groups = { creative_breakable = 1 },
+	groups = { attached_node = 1, creative_breakable = 1 },
 	damage_per_second = 1,
 	collision_box = {
 		type = "fixed",
@@ -85,7 +85,7 @@ minetest.register_node("supplemental:spikes_large", {
 	paramtype = "light",
 	walkable = false,
 	drawtype = "plantlike",
-	groups = { creative_breakable = 1 },
+	groups = { attached_node = 1, creative_breakable = 1 },
 	damage_per_second = 2
 })
 

@@ -126,7 +126,7 @@ minetest.register_node("default:grass_5", {
 	description = S("grass"),
 	tiles = {"default_grass_5.png"},
 	is_ground_content = true,
-	groups = {creative_breakable=1},
+	groups = {attached_node=1,creative_breakable=1},
 	sounds = default.node_sound_leaves_defaults(),
 	wield_image = "default_grass_5.png",
 	inventory_image = "default_grass_5.png",

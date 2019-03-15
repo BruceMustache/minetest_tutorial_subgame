@@ -33,7 +33,7 @@ minetest.register_node("cottages:sleeping_mat", {
         paramtype2 = "facedir",
         is_ground_content = true,
         walkable = false,
-        groups = { creative_breakable=1 },
+        groups = { attached_node=1, creative_breakable=1 },
         sounds = default.node_sound_leaves_defaults(),
         selection_box = {
                         type = "wallmounted",
