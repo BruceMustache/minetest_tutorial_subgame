@@ -25,3 +25,4 @@ The Good-Bye Room = De Afscheidskamer
 Exit = Uitgang
 Comestibles room = Voedingskamer
 Smelting room = Smeltingkamer
+Building section = Afdeling Bouwen

@@ -25,3 +25,4 @@ The Good-Bye Room = Sala de despedida
 Exit = Salida
 Comestibles room = Sala de comestibles
 Smelting room = Sala de fundición
+Building section = Sección de construcción

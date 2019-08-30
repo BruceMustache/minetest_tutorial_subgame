@@ -25,3 +25,4 @@ The Good-Bye Room = Δωμάτιο αποχαιρετισμού
 Exit = Έξοδος
 Comestibles room = Δωμάτιο φαγητών
 Smelting room = Δωμάτιο λιωσίματος
+Building section = Περιοχή κτισίματος

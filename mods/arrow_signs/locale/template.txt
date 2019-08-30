@@ -25,3 +25,4 @@ The Good-Bye Room
 Exit
 Comestibles room
 Smelting room
+Building section
