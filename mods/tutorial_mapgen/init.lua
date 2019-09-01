@@ -18,8 +18,6 @@ local c_grass = minetest.get_content_id("default:grass_5")
 tutorial.map_directory = minetest.get_modpath("tutorial_mapgen").."/mapdata/"
 
 local insecure_environment = minetest.request_insecure_environment()
-minetest.log("error", tostring(insecure_environment ~= nil))
-minetest.log("error", tostring(map_editing ~= nil))
 
 -- entity management functions
 
