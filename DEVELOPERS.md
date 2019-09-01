@@ -8,11 +8,11 @@ The tutorial castle is saved in the game itself in schematics and other binary m
 ## How to edit the map
 ### Summary
 
-1. Trust the code. In the settings menu or `minetest.conf`, add `tutorial_mapgen` to `secure.trusted_mods`
-2. In `minetest.conf`, add `tutorial_debug_map_editing = true`
-3. In `minetest.conf`, add `tutorial_debug_edit_item_spawners = true`
-4. If Minetest is running, restart it
-5. Create a new world, enable Creative Mode and enter it in singleplayer
+1. If Minetest is running, shut it down
+2. Trust the code. In the settings menu or `minetest.conf`, add `tutorial_mapgen` to `secure.trusted_mods`
+3. In `minetest.conf`, add `tutorial_debug_map_editing = true`
+4. In `minetest.conf`, add `tutorial_debug_edit_item_spawners = true`
+5. Start Minetest and create a new world, enable Creative Mode and enter the world in singleplayer
 6. Edit the map to your likings
 7. Grant yourselves the `tutorialmap` privilege
 8. Use `/tsave` command to save the map
