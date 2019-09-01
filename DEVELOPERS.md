@@ -3,12 +3,30 @@ Here is some useful info for developers.
 ### How the map is saved
 The map is not stored in a traditional way, like in real Minetest world. Instead, the tutorial generates the world on-the-fly when the player creates a new world.
 
-The tutorial castle is saved in the game itself in schematics and other binary metadata files in `mods/tutorial/mapdata`. When you start a new world, Tutorial force-sets the mapgen to `singlenode`, loads the schematics and places them. After that, it generates the grassland surroundings.
+The tutorial castle is saved in the game itself in schematics and other binary metadata files in `mods/tutorial_mapgen/mapdata`. When you start a new world, Tutorial force-sets the mapgen to `singlenode`, loads the schematics and places them. After that, it generates the grassland surroundings.
 
 ## How to edit the map
+### Summary
+
+1. Trust the code. In the settings menu or `minetest.conf`, add `tutorial_mapgen` to `secure.trusted_mods`
+2. In `minetest.conf`, add `tutorial_debug_map_editing = true`
+3. In `minetest.conf`, add `tutorial_debug_edit_item_spawners = true`
+4. If Minetest is running, restart it
+5. Create a new world, enable Creative Mode and enter it in singleplayer
+6. Edit the map to your likings
+7. Grant yourselves the `tutorialmap` privilege
+8. Use `/tsave` command to save the map
+9. Test your world: Disable the two settings from steps 2 and 3, create a new world and test it
+
+The changes will end up in `mods/tutorial_mapgen/mapdata`. If everything worked, you can now commit the changes, use them in a patch or whatever.
+
+If you want to edit item spawn positions, see the details below.
+
 ### Mod security
-First, you need to list `tutorial` as a trusted mod because the `/tsave` command needs write access.
-You can review the relevant code in `mods/tutorial/mapgen.lua`.
+First, you need to list `tutorial_mapgen` as a trusted mod because the `/tsave` command needs write access.
+You can review the relevant code in `mods/tutorial_mapgen/init.lua`.
+
+Use the setting `secure.trusted_mods` to edit the list of trusted mods.
 
 ### Editing the map
 You want to only edit the map data files. Here's how:
@@ -23,7 +41,7 @@ tutorial_debug_edit_item_spawners = true
 This enables the `/treset` and `/tsave` commands to help editing the schematic. It also forces the Tutorial to only generate the raw castle, not the grasslands. Also, the item spawners become visible.
 
 Create a new world in Creative Mode. Now edit the map to your likings using your instant digging power and the creative inventory. You can of course WorldEdit to speed up the process.
-If you're finished, use the `/tsave` command. This updates the map files in `mods/tutorial/mapdata`. Note that there are limits as for how big the tutorial castle can be.
+If you're finished, grant yourself the `tutorialmap` privilege and use the `/tsave` command. This updates the map files in `mods/tutorial_mapgen/mapdata`. Note that there are limits as for how big the tutorial castle can be.
 
 ### About item spawners
 To place items in the map, you must use the item spawners, these are simple nodes that spawn items. They have 2 states: active and inactive.
@@ -37,4 +55,4 @@ If you mess with item spawners, the setting `tutorial_debug_edit_item_spawners` 
 ### Testing and finalizing
 To test your new map, remove the 2 `minetest.conf` settings and create a new world and check if everything works. If it does work, you can commit your changes now.
 
-(Note: The `/tsave` command is not available if the `tutorial` mod failed to request an "insecure" environment due to mod security issues.)
+(Note: The `/tsave` command is not available if the `tutorial_mapgen` mod failed to request an "insecure" environment due to mod security issues.)

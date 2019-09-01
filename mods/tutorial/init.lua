@@ -4,6 +4,9 @@ tutorial = {}
 -- If true, item spawner nodes become visible and pointable.
 local edit_item_spawners = minetest.settings:get_bool("tutorial_debug_edit_item_spawners")
 
+-- See tutorial_mapgen/init.lua
+local map_editing = minetest.settings:get_bool("tutorial_debug_map_editing")
+
 -- == END OF DEBUG SETTINGS ==
 
 -- intllib support
@@ -1349,7 +1352,7 @@ minetest.register_on_joinplayer(function(player)
 		"]"..
 		"button_exit[2.5,5.5;3,1;close;"..minetest.formspec_escape(S("Continue anyways")).."]"..
 		"button_exit[6.5,5.5;3,1;leave;"..minetest.formspec_escape(S("Leave tutorial")).."]"
-	elseif(minetest.settings:get_bool("creative_mode")) then
+	elseif(not map_editing and minetest.settings:get_bool("creative_mode")) then
 		formspec = "size[12,6]"..
 		"label[-0.15,-0.4;"..(minetest.formspec_escape(S("Warning: Creative mode is active"))).."]"..
 		"tablecolumns[text]"..
@@ -1360,7 +1363,7 @@ minetest.register_on_joinplayer(function(player)
 		"button_exit[2.5,5.5;3,1;close;"..minetest.formspec_escape(S("Continue anyways")).."]"..
 		"button_exit[6.5,5.5;3,1;leave;"..minetest.formspec_escape(S("Leave tutorial")).."]"
 
-	elseif(tutorial.state.intro_text == false) then
+	elseif(not map_editing and tutorial.state.intro_text == false) then
 		formspec = "size[12,6]"..
 		"label[-0.15,-0.4;"..minetest.formspec_escape(S("Introduction")).."]"..
 		"tablecolumns[text]"..
@@ -1564,5 +1567,3 @@ function tutorial.extract_texts()
 	io.close(file)
 end
 
--- Load map generation and map data management functions
-dofile(minetest.get_modpath("tutorial").."/mapgen.lua")

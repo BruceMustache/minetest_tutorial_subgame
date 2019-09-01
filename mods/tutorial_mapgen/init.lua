@@ -15,9 +15,11 @@ local c_dirt_with_grass = minetest.get_content_id("default:dirt_with_grass")
 local c_grass = minetest.get_content_id("default:grass_5")
 
 -- Directory where the map data will be stored
-tutorial.map_directory = minetest.get_modpath("tutorial").."/mapdata/"
+tutorial.map_directory = minetest.get_modpath("tutorial_mapgen").."/mapdata/"
 
 local insecure_environment = minetest.request_insecure_environment()
+minetest.log("error", tostring(insecure_environment ~= nil))
+minetest.log("error", tostring(map_editing ~= nil))
 
 -- entity management functions
 
@@ -28,7 +30,7 @@ local function init_item_spawners(spawners)
 		timer:start(3)
 		count = count + 1
 	end
-	minetest.log("action", "[tutorial] " .. count .. " item spawners initialized")
+	minetest.log("action", "[tutorial_mapgen] " .. count .. " item spawners initialized")
 end
 
 ---
@@ -84,7 +86,7 @@ local function save_region(minp, maxp, probability_list, filename, slice_prob_li
 
 	local success = minetest.create_schematic(minp, maxp, probability_list, filename .. ".mts", slice_prob_list)
 	if not success then
-		minetest.log("error", "[tutorial] problem creating schematic on ".. minetest.pos_to_string(minp) .. ": " .. filename)
+		minetest.log("error", "[tutorial_mapgen] problem creating schematic on ".. minetest.pos_to_string(minp) .. ": " .. filename)
 		return false
 	end
 
@@ -152,9 +154,9 @@ local function save_region(minp, maxp, probability_list, filename, slice_prob_li
 		file:write(minetest.compress(result))
 		file:flush()
 		file:close()
-		minetest.log("action", "[tutorial] schematic + metadata saved: " .. filename)
+		minetest.log("action", "[tutorial_mapgen] schematic + metadata saved: " .. filename)
 	else
-	   minetest.log("action", "[tutorial] schematic (no metadata) saved: " .. filename)
+	   minetest.log("action", "[tutorial_mapgen] schematic (no metadata) saved: " .. filename)
 	end
 	return success, count
 end
@@ -184,9 +186,9 @@ local function load_region(minp, filename, vmanip, rotation, replacements, force
 	end
 
 	if success == false then
-		minetest.log("action", "[tutorial] schematic partionally loaded on ".. minetest.pos_to_string(minp))
+		minetest.log("action", "[tutorial_mapgen] schematic partionally loaded on ".. minetest.pos_to_string(minp))
 	elseif not success then
-		minetest.log("error", "[tutorial] problem placing schematic on ".. minetest.pos_to_string(minp) .. ": " .. filename)
+		minetest.log("error", "[tutorial_mapgen] problem placing schematic on ".. minetest.pos_to_string(minp) .. ": " .. filename)
 		return nil
 	end
 
@@ -224,11 +226,11 @@ local function load_region(minp, filename, vmanip, rotation, replacements, force
 				if entry.meta then get_meta(entry):from_table(entry.meta) end
 			end
 		else
-			minetest.log("error", "[tutorial] unsupported rotation angle: " ..  (rotation or "nil"))
+			minetest.log("error", "[tutorial_mapgen] unsupported rotation angle: " ..  (rotation or "nil"))
 			return false
 		end
 	end
-	minetest.log("action", "[tutorial] schematic + metadata loaded on ".. minetest.pos_to_string(minp))
+	minetest.log("action", "[tutorial_mapgen] schematic + metadata loaded on ".. minetest.pos_to_string(minp))
 	return true, spawners
 end
 
@@ -243,7 +245,7 @@ local function save_schematic()
 			z = sector.z + sector.l
 		}
 		if not save_region(minp, maxp, nil, filename) then
-			minetest.log("error", "[tutorial] error loading Tutorial World sector " .. minetest.pos_to_string(sector))
+			minetest.log("error", "[tutorial_mapgen] error loading Tutorial World sector " .. minetest.pos_to_string(sector))
 			success = false
 		end
 	end
@@ -263,7 +265,7 @@ local function load_schematic()
 
 		local vmanip = VoxelManip(sector, sector.maxp)
 		if not load_region(sector, filename, vmanip, nil, nil, true) then
-			minetest.log("error", "[tutorial] error loading Tutorial World sector " .. minetest.pos_to_string(sector))
+			minetest.log("error", "[tutorial_mapgen] error loading Tutorial World sector " .. minetest.pos_to_string(sector))
 			success = false
 		end
 		vmanip:calc_lighting()
@@ -277,6 +279,11 @@ end
 ------ Commands
 
 if map_editing then
+	minetest.log("action", "Map editing mode is enabled.")
+	minetest.register_on_joinplayer(function(player)
+		minetest.chat_send_player(player:get_player_name(), "Map editing mode is enabled.")
+	end)
+
 	minetest.register_privilege("tutorialmap", "Can use commands to manage the tutorial map")
 	minetest.register_chatcommand("treset", {
 		params = "",
@@ -307,6 +314,11 @@ if map_editing then
 				end
 			end,
 		})
+	else
+		minetest.log("warning", "Could not create insecure environment! /tsave command is disabled.")
+		minetest.register_on_joinplayer(function(player)
+			minetest.chat_send_player(player:get_player_name(), "Could not create insecure environment! /tsave command is not available.")
+		end)
 	end
 end
 
