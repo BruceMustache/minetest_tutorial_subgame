@@ -118,6 +118,9 @@ minetest.register_abm( {
 		local meta = minetest.get_meta(pos)
 		local id = meta:get_string("id")
 		local caption = tutorial.captions[id]
+		if id == "" then
+			return
+		end
 		local formspec = ""..
 			"size[12,6]"..
 			"label[-0.15,-0.4;"..minetest.formspec_escape(S(caption)).."]"..
