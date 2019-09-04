@@ -16,6 +16,7 @@ local c_grass = minetest.get_content_id("default:grass_5")
 
 -- Directory where the map data will be stored
 tutorial.map_directory = minetest.get_modpath("tutorial_mapgen").."/mapdata/"
+tutorial.map_save_directory = minetest.get_worldpath().."/mapdata/"
 
 local insecure_environment = minetest.request_insecure_environment()
 
@@ -233,9 +234,12 @@ local function load_region(minp, filename, vmanip, rotation, replacements, force
 end
 
 local function save_schematic()
+	minetest.log("action", "[tutorial_mapgen] Map data save requested")
+	minetest.chat_send_all("Saving map data, please wait ...")
 	local success = true
+	minetest.mkdir(tutorial.map_save_directory)
 	for k,sector in pairs(tutorial.map_sector) do
-		local filename = tutorial.map_directory .. "sector_"..k
+		local filename = tutorial.map_save_directory .. "sector_"..k
 		local minp = sector
 		local maxp = {
 			x = sector.x + sector.l,
@@ -246,6 +250,9 @@ local function save_schematic()
 			minetest.log("error", "[tutorial_mapgen] error loading Tutorial World sector " .. minetest.pos_to_string(sector))
 			success = false
 		end
+	end
+	if success then
+		minetest.chat_send_all("Map data saved to: "..tutorial.map_save_directory)
 	end
 	return success
 end
@@ -305,9 +312,7 @@ if map_editing then
 			description = "Saves the tutorial map",
 			privs = {tutorialmap=true},
 			func = function(name, param)
-				if save_schematic() then
-					minetest.chat_send_player(name, "Tutorial World schematic saved")
-				else
+				if not save_schematic() then
 					minetest.chat_send_player(name, "An error occurred while saving Tutorial World schematic")
 				end
 			end,

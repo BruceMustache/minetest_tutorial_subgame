@@ -16,9 +16,8 @@ The tutorial castle is saved in the game itself in schematics and other binary m
 6. Edit the map to your likings
 7. Grant yourselves the `tutorialmap` privilege
 8. Use `/tsave` command to save the map
-9. Test your world: Disable the two settings from steps 2 and 3, create a new world and test it
 
-The changes will end up in `mods/tutorial_mapgen/mapdata`. If everything worked, you can now commit the changes, use them in a patch or whatever.
+The changes will end up in `<world directory>/mapdata`. Copy this directory to `<game directory>/mods/tutorial_mapgen`, overwriting files, if neccessary.
 
 If you want to edit item spawn positions, see the details below.
 
@@ -41,7 +40,9 @@ tutorial_debug_edit_item_spawners = true
 This enables the `/treset` and `/tsave` commands to help editing the schematic. It also forces the Tutorial to only generate the raw castle, not the grasslands. Also, the item spawners become visible.
 
 Create a new world in Creative Mode. Now edit the map to your likings using your instant digging power and the creative inventory. You can of course WorldEdit to speed up the process.
-If you're finished, grant yourself the `tutorialmap` privilege and use the `/tsave` command. This updates the map files in `mods/tutorial_mapgen/mapdata`. Note that there are limits as for how big the tutorial castle can be.
+If you're finished, grant yourself the `tutorialmap` privilege and use the `/tsave` command. This updates the map files in `<world directory>/mapdata`. Note that there are limits as for how big the tutorial castle can be.
+
+Copy the contents of this directory to the `tutorial_mapgen` mod under `mapdata` and overwrite files as neccessary. Test your changes by creating a new world. If everything went fine, you can commit your changes now.
 
 ### About item spawners
 To place items in the map, you must use the item spawners, these are simple nodes that spawn items. They have 2 states: active and inactive.
