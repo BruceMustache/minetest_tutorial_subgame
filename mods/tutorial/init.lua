@@ -999,6 +999,13 @@ minetest.register_node("tutorial:wall", {
 	sounds = default.node_sound_stone_defaults(),
 })
 
+minetest.register_node("tutorial:wood", {
+	description = S("reinforced wood"),
+	tiles = {"default_wood.png"},
+	groups = {creative_breakable=1},
+	sounds = default.node_sound_wood_defaults(),
+})
+
 minetest.register_node("tutorial:reinforced_glass", {
 	description = S("reinforced glass"),
 	drawtype = "glasslike",
