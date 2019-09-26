@@ -62,6 +62,11 @@ There's also a secret prize, can you win it?
 This tutorial is free software. You can legally study, copy, share, transform, remix, distribute this to your liking, under certain conditions.
 
 The mods “`tutorial`” and “supplemental” as well the tutorial world are original work by Wuzzy and fall under the MIT License.
+The mod “`tutorial_mapgen`” (Tutorial World generator) is also original work by Wuzzy, same license, but it contains contributions.
+
+Contributions:
+
+* Drachenbauer32 added reinforced wood and improved the straw room and the the red roof a bit.
 
 Other mods are creation by other people, but heavily modified to fit the Tutorial's needs.
 
