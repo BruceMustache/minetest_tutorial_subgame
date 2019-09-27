@@ -2,7 +2,7 @@
 
 Created by Wuzzy
 
-Version: 3.0.1
+Version: 3.0.2
 Playable in Minetest 5.0.0 or later.
 
 Learn how to use and play Minetest in a nice and cozy castle. Here you learn most of the basics of Minetest and how to play.
